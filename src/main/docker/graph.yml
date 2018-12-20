@@ -22,8 +22,8 @@ services:
       - elasticsearch
       - cassandra
     volumes:
-      - C:\dev\insight\src\main\docker\compose\graph\janus\conf\gremlin-server\gremlin-server-configuration.yaml:/app/janusgraph-0.2.2-hadoop2/conf/gremlin-server/gremlin-server-configuration.yaml
-      - C:\dev\insight\src\main\docker\compose\graph\janus\conf\janusgraph.properties:/app/janusgraph-0.2.2-hadoop2/conf/janusgraph.properties
+      - ./janus/conf/gremlin-server/gremlin-server-configuration.yaml:/app/janusgraph-0.2.2-hadoop2/conf/gremlin-server/gremlin-server-configuration.yaml
+      - ./janus/conf/janusgraph.properties:/app/janusgraph-0.2.2-hadoop2/conf/janusgraph.properties
 
   elasticsearch:
     container_name: elasticsearch
@@ -40,7 +40,7 @@ services:
     ports:
       - "9200:9200"
     volumes:
-      - C:\dev\insight\src\main\docker\compose\graph\es\elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./es/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   cassandra:
     container_name: cassandra
@@ -58,7 +58,7 @@ services:
     volumes: # uncomment if you desire mounts, also uncomment cluster.sh
     #  - C:\dev\insight\src\main\docker\compose\graph\cassandra:/var/lib/cassandra
       - named_vol:/var/lib/cassandra
-      - C:\dev\insight\src\main\docker\compose\graph\janus\conf\cassandra.yaml:/etc/cassandra/cassandra.yaml
+      - ./janus/conf/cassandra.yaml:/etc/cassandra/cassandra.yaml
     #  - C:\dev\insight\src\main\docker\compose\graph\janus\conf\jvm.options:/etc/cassandra/jvm.options
     command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 0; fi && /docker-entrypoint.sh cassandra -f'
 volumes:
