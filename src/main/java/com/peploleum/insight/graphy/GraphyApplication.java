@@ -20,6 +20,9 @@ public class GraphyApplication {
     private static final String PERSON_ID = "89757";
     private static final String PERSON_ID_0 = "0123456789";
     private static final String PERSON_ID_1 = "666666";
+    private static final Long LONG_PERSON_ID = 12L;
+    private static final Long LONG_PERSON_ID_0 = 13L;
+    private static final Long LONG_PERSON_ID_1 = 14L;
     private static final String PERSON_NAME = "person-name";
     private static final String PERSON_NAME_0 = "person-No.0";
     private static final String PERSON_NAME_1 = "person-No.1";
@@ -28,12 +31,13 @@ public class GraphyApplication {
     private static final String PERSON_AGE_1 = "27";
 
     private static final String RELATION_ID = "2333";
+    private static final Long LONG_RELATION_ID = 2333L;
     private static final String RELATION_NAME = "brother";
 
-    private final Person person = new Person(PERSON_ID, PERSON_NAME, PERSON_AGE);
-    private final Person person0 = new Person(PERSON_ID_0, PERSON_NAME_0, PERSON_AGE_0);
-    private final Person person1 = new Person(PERSON_ID_1, PERSON_NAME_1, PERSON_AGE_1);
-    private final Relation relation = new Relation(RELATION_ID, RELATION_NAME, person0, person1);
+    private final Person person = new Person(LONG_PERSON_ID, PERSON_NAME, PERSON_AGE);
+    private final Person person0 = new Person(LONG_PERSON_ID_0, PERSON_NAME_0, PERSON_AGE_0);
+    private final Person person1 = new Person(LONG_PERSON_ID_1, PERSON_NAME_1, PERSON_AGE_1);
+    private final Relation relation = new Relation(LONG_RELATION_ID, RELATION_NAME, person0, person1);
     private final Network network = new Network();
 
     private final Logger log = LoggerFactory.getLogger(GraphyApplication.class);

@@ -15,6 +15,7 @@
  */
 package com.peploleum.insight.graphy.domain;
 
+import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Vertex;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +29,8 @@ import org.springframework.data.annotation.Id;
 public class Person {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
 
     private String name;
 

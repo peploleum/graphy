@@ -22,6 +22,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface PersonRepository extends GremlinRepository<Person, String> {
+public interface PersonRepository extends GremlinRepository<Person, Long> {
 }
 

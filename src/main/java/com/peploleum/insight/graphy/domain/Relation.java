@@ -32,7 +32,7 @@ import org.springframework.data.annotation.Id;
 public class Relation {
 
     @Id
-    private String id;
+    private Long id;
 
     private String name;
 
