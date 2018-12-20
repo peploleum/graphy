@@ -1,3 +1,5 @@
 spring:
   main:
     web-application-type: none
+endpoint: localhost
+port: 8182
