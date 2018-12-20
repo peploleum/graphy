@@ -7,6 +7,8 @@ import com.peploleum.insight.graphy.domain.Relation;
 import com.peploleum.insight.graphy.repository.NetworkRepository;
 import com.peploleum.insight.graphy.repository.PersonRepository;
 import com.peploleum.insight.graphy.repository.RelationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,6 +36,8 @@ public class GraphyApplication {
     private final Relation relation = new Relation(RELATION_ID, RELATION_NAME, person0, person1);
     private final Network network = new Network();
 
+    private final Logger log = LoggerFactory.getLogger(GraphyApplication.class);
+
     @Autowired
     private PersonRepository personRepo;
 
@@ -52,7 +56,11 @@ public class GraphyApplication {
 
     @PostConstruct
     public void setup() {
-        this.networkRepo.deleteAll();
+        try {
+            this.networkRepo.deleteAll();
+        } catch (Exception e) {
+            this.log.error(e.getMessage(), e);
+        }
 
         this.network.getEdges().add(this.relation);
         this.network.getVertexes().add(this.person);
