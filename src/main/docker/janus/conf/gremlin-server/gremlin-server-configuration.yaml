@@ -4,8 +4,8 @@ scriptEvaluationTimeout: 30000000
 channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer
 graphManager: org.janusgraph.graphdb.management.JanusGraphManager
 graphs: {
-  ConfigurationManagementGraph: conf/janusgraph.properties
-   #graph: conf/janusgraph.properties
+  #ConfigurationManagementGraph: conf/janusgraph.properties
+  graph: conf/janusgraph.properties
 }
 plugins:
   - janusgraph.imports

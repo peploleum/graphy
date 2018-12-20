@@ -1,0 +1,29 @@
+version: '3'
+services:
+  janusgraph:
+    image: janusgraph:0.2.2-hadoop2
+    build:
+      dockerfile: Dockerfile
+      args:
+        version: 0.2.2
+        hadoop: hadoop2
+      context: janus
+    container_name: janusgraph
+    #command: ["tail", "-f", "/dev/null"]
+    ports:
+    - "8182:8182"
+    - "9160:9160"
+    - "9042:9042"
+    expose:
+    - 9042
+    - 9160
+    command: bash -c 'sleep 05 && ./bin/gremlin-server.sh ./conf/gremlin-server/gremlin-server-configuration.yaml'
+    volumes:
+    - ./janus/conf/gremlin-server/gremlin-server-configuration.yaml:/app/janusgraph-0.2.2-hadoop2/conf/gremlin-server/gremlin-server-configuration.yaml
+    - ./janus/conf/gremlin-server/scripts/startup.groovy:/app/janusgraph-0.2.2-hadoop2/scripts/startup.groovy
+    - ./janus/conf/janusgraph.properties:/app/janusgraph-0.2.2-hadoop2/conf/janusgraph.properties
+    networks:
+    - graph
+networks:
+   graph:
+    external: true
