@@ -23,7 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GraphyApplication {
     private static final int AGE_THRESHOLD = 100;
 
-    private final Network network = new Network();
+    private Network network = null;
 
     private final Logger log = LoggerFactory.getLogger(GraphyApplication.class);
 
@@ -45,15 +45,18 @@ public class GraphyApplication {
 
     @PostConstruct
     public void setup() {
-        this.log.info("Deleting existing g");
-        try {
-            this.networkRepo.deleteAll();
-        } catch (Exception e) {
-            this.log.error(e.getMessage(), e);
-        }
+//        try {
+//            final Iterable<Network> all = this.networkRepo.findAll(Network.class);
+//            if (all.iterator().hasNext()) {
+//                this.log.info("Found network");
+//                this.network = all.iterator().next();
+//            }
+//        } catch (Exception e) {
+//            this.log.error(e.getMessage(), e);
+//        }
         this.log.info("Creating vertices");
 
-        final int VERTICES_THRESHOLD = 100;
+        final int VERTICES_THRESHOLD = 1;
 
         final Set<Person> savedPersons = new HashSet<>();
         for (int i = 0; i < VERTICES_THRESHOLD; i++) {
@@ -81,6 +84,12 @@ public class GraphyApplication {
         }
 
         this.log.info("Creating graph");
+        if (this.network == null) {
+            this.log.info("Creating new graph");
+            this.network = new Network();
+        } else {
+            this.log.info("Using existing graph: " + this.network.getId());
+        }
         this.network.getVertexes().addAll(savedPersons);
         this.network.getEdges().addAll(savedRelations);
         final Network saved = this.networkRepo.save(this.network);

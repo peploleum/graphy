@@ -15,7 +15,7 @@ public class Network {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private String id;
 
     public Network() {
         this.edges = new ArrayList<Object>();
@@ -30,7 +30,11 @@ public class Network {
     @Getter
     private List<Object> vertexes;
 
-    public Long getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
