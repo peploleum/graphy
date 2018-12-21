@@ -1,12 +1,14 @@
 version: '3'
 services:
   graphy:
-    image: peploleum/graphy:latest
+    image: graphy
     environment:
-    - "JAVA_OPTS=-Xms512m -Xmx512m"
-    - "ENDPOINT=localhost"
-    - "PORT=8182"
-    - "VERTEX_THRESHOLD=10"
+      JAVA_OPTS: -Xms128m -Xmx512m
+      ENDPOINT: janusgraph
+      PORT: 8182
+      VERTEX_THRESHOLD: 10
+    networks:
+    - graph
 networks:
   graph:
     external: true

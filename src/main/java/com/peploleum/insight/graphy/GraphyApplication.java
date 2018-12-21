@@ -28,7 +28,7 @@ public class GraphyApplication {
     private int vertexThreshod;
     private Network network = null;
 
-    private final Logger log = LoggerFactory.getLogger(GraphyApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(GraphyApplication.class);
 
     @Autowired
     private PersonRepository personRepo;
@@ -43,11 +43,15 @@ public class GraphyApplication {
     private GremlinFactory factory;
 
     public static void main(String[] args) {
+
+        log.warn("Starting app");
         SpringApplication.run(GraphyApplication.class, args);
+        log.warn("app running");
     }
 
     @PostConstruct
     public void setup() {
+        log.warn("Starting");
 //        try {
 //            final Iterable<Network> all = this.networkRepo.findAll(Network.class);
 //            if (all.iterator().hasNext()) {
@@ -57,7 +61,7 @@ public class GraphyApplication {
 //        } catch (Exception e) {
 //            this.log.error(e.getMessage(), e);
 //        }
-        this.log.info("Creating vertices");
+        log.info("Creating vertices");
 
         final int VERTICES_THRESHOLD = this.vertexThreshod;
 
@@ -71,7 +75,7 @@ public class GraphyApplication {
             this.log.info("Vertex saved: " + savedPerson.getId());
             savedPersons.add(savedPerson);
         }
-        this.log.info("Creating edges");
+        log.info("Creating edges");
 
         final Set<Relation> savedRelations = new HashSet<Relation>();
         for (final Person savedPerson : savedPersons) {
@@ -86,7 +90,7 @@ public class GraphyApplication {
             }
         }
 
-        this.log.info("Creating graph");
+        log.info("Creating graph");
         if (this.network == null) {
             this.log.info("Creating new graph");
             this.network = new Network();
@@ -96,7 +100,7 @@ public class GraphyApplication {
         this.network.getVertexes().addAll(savedPersons);
         this.network.getEdges().addAll(savedRelations);
         final Network saved = this.networkRepo.save(this.network);
-        this.log.info("Saved graph " + saved.getId() + " " + saved.getEdges().size() + " " + saved.getVertexes().size());
+        log.info("Saved graph " + saved.getId() + " " + saved.getEdges().size() + " " + saved.getVertexes().size());
     }
 }
 
