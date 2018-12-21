@@ -10,6 +10,7 @@ import com.peploleum.insight.graphy.repository.RelationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -23,6 +24,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GraphyApplication {
     private static final int AGE_THRESHOLD = 100;
 
+    @Value("${vertex-threshold}")
+    private int vertexThreshod;
     private Network network = null;
 
     private final Logger log = LoggerFactory.getLogger(GraphyApplication.class);
@@ -56,7 +59,7 @@ public class GraphyApplication {
 //        }
         this.log.info("Creating vertices");
 
-        final int VERTICES_THRESHOLD = 1;
+        final int VERTICES_THRESHOLD = this.vertexThreshod;
 
         final Set<Person> savedPersons = new HashSet<>();
         for (int i = 0; i < VERTICES_THRESHOLD; i++) {

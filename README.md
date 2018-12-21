@@ -9,4 +9,5 @@ Up the services
 
 Build
 
-    mvn clean compile package -DSkipTests
+    mvn clean compile package -DSkipTests jib:dockerBuild
+    

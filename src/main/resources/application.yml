@@ -3,3 +3,4 @@ spring:
     web-application-type: none
 endpoint: localhost
 port: 8182
+vertex-threshold: 10
