@@ -23,7 +23,7 @@ services:
       - cassandra
     volumes:
       - ./janus/conf/gremlin-server/gremlin-server-configuration.yaml:/app/janusgraph-0.2.2-hadoop2/conf/gremlin-server/gremlin-server-configuration.yaml
-      - ./janus/conf/gremlin-server/scripts/:/app/janusgraph-0.2.2-hadoop2/conf/gremlin-server/scripts/
+      - ./janus/conf/gremlin-server/scripts/:/app/janusgraph-0.2.2-hadoop2/scripts/
       - ./janus/conf/janusgraph.properties:/app/janusgraph-0.2.2-hadoop2/conf/janusgraph.properties
 
   elasticsearch:
