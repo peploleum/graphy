@@ -21,7 +21,7 @@ import com.peploleum.insight.graphy.domain.Relation;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RelationRepository extends GremlinRepository<Relation, Long> {
+public interface RelationRepository extends GremlinRepository<Relation, String> {
 
 }
 

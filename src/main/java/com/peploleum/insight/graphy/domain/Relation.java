@@ -19,6 +19,7 @@ package com.peploleum.insight.graphy.domain;
 import com.microsoft.spring.data.gremlin.annotation.Edge;
 import com.microsoft.spring.data.gremlin.annotation.EdgeFrom;
 import com.microsoft.spring.data.gremlin.annotation.EdgeTo;
+import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,8 @@ import org.springframework.data.annotation.Id;
 public class Relation {
 
     @Id
-    private Long id;
+    @GeneratedValue
+    private String id;
 
     private String name;
 
@@ -41,5 +43,29 @@ public class Relation {
 
     @EdgeTo
     private Person personTo;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Person getPersonFrom() {
+        return personFrom;
+    }
+
+    public void setPersonFrom(Person personFrom) {
+        this.personFrom = personFrom;
+    }
+
+    public Person getPersonTo() {
+        return personTo;
+    }
+
+    public void setPersonTo(Person personTo) {
+        this.personTo = personTo;
+    }
 }
 

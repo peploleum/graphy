@@ -1,6 +1,7 @@
 package com.peploleum.insight.graphy.domain;
 
 import com.microsoft.spring.data.gremlin.annotation.EdgeSet;
+import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Graph;
 import com.microsoft.spring.data.gremlin.annotation.VertexSet;
 import lombok.Getter;
@@ -13,7 +14,8 @@ import java.util.List;
 public class Network {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
 
     public Network() {
         this.edges = new ArrayList<Object>();

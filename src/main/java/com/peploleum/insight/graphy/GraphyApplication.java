@@ -34,10 +34,11 @@ public class GraphyApplication {
     private static final Long LONG_RELATION_ID = 2333L;
     private static final String RELATION_NAME = "brother";
 
-    private final Person person = new Person(LONG_PERSON_ID, PERSON_NAME, PERSON_AGE);
-    private final Person person0 = new Person(LONG_PERSON_ID_0, PERSON_NAME_0, PERSON_AGE_0);
-    private final Person person1 = new Person(LONG_PERSON_ID_1, PERSON_NAME_1, PERSON_AGE_1);
-    private final Relation relation = new Relation(LONG_RELATION_ID, RELATION_NAME, person0, person1);
+    //    private final Person person = new Person(PERSON_ID, PERSON_NAME, PERSON_AGE);
+    private final Person person = new Person();
+    private final Person person0 = new Person();
+    private final Person person1 = new Person();
+    private final Relation relation = new Relation();
     private final Network network = new Network();
 
     private final Logger log = LoggerFactory.getLogger(GraphyApplication.class);
@@ -66,12 +67,28 @@ public class GraphyApplication {
             this.log.error(e.getMessage(), e);
         }
 
-        this.network.getEdges().add(this.relation);
-        this.network.getVertexes().add(this.person);
-        this.network.getVertexes().add(this.person0);
-        this.network.getVertexes().add(this.person1);
+        this.person.setAge(PERSON_AGE);
+        this.person0.setAge(PERSON_AGE_0);
+        this.person1.setAge(PERSON_AGE_1);
+        this.person.setName(PERSON_NAME);
+        this.person0.setName(PERSON_NAME_0);
+        this.person1.setName(PERSON_NAME_0);
 
-        this.networkRepo.save(this.network);
+        final Person savedPerson = this.personRepo.save(this.person);
+        final Person savedPerson0 = this.personRepo.save(this.person0);
+        final Person savedPerson1 = this.personRepo.save(this.person1);
+
+        this.network.getVertexes().add(savedPerson);
+        this.network.getVertexes().add(savedPerson0);
+        this.network.getVertexes().add(savedPerson1);
+//
+        this.relation.setName(RELATION_NAME);
+        this.relation.setPersonFrom(savedPerson);
+        this.relation.setPersonTo(savedPerson0);
+
+        final Relation savedRelation = this.relationRepo.save(this.relation);
+        this.network.getEdges().add(savedRelation);
+        final Network saved = this.networkRepo.save(this.network);
     }
 }
 

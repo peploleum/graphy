@@ -21,6 +21,6 @@ import com.peploleum.insight.graphy.domain.Network;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NetworkRepository extends GremlinRepository<Network, String> {
+public interface NetworkRepository extends GremlinRepository<Network, Long> {
 }
 
