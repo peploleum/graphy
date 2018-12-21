@@ -6,4 +6,7 @@ Up the services
     docker network create graph
     docker-compose.exe -f .\graph-db.yml up -d
     docker-compose.exe -f .\graph-janus.yml up -d
-    
+
+Build
+
+    mvn clean compile package -DSkipTests
