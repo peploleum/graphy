@@ -1,0 +1,12 @@
+version: '3'
+services:
+  graphy:
+    image: peploleum/graphy:latest
+    environment:
+    - "JAVA_OPTS=-Xms512m -Xmx512m"
+    - "ENDPOINT=localhost"
+    - "PORT=8182"
+    - "VERTEX_THRESHOLD=10"
+networks:
+  graph:
+    external: true

@@ -9,5 +9,7 @@ Up the services
 
 Build
 
-    mvn clean compile package -DSkipTests jib:dockerBuild
-    
+    mvn clean compile package -DskipTests=true jib:dockerBuild
+    docker login --username=peploleum
+    docker tag graphy peploleum/graphy:latest
+    docker push peploleum/graphy:latest
