@@ -14,31 +14,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 public class GraphyApplication {
-    private static final String PERSON_ID = "89757";
-    private static final String PERSON_ID_0 = "0123456789";
-    private static final String PERSON_ID_1 = "666666";
-    private static final Long LONG_PERSON_ID = 12L;
-    private static final Long LONG_PERSON_ID_0 = 13L;
-    private static final Long LONG_PERSON_ID_1 = 14L;
-    private static final String PERSON_NAME = "person-name";
-    private static final String PERSON_NAME_0 = "person-No.0";
-    private static final String PERSON_NAME_1 = "person-No.1";
-    private static final String PERSON_AGE = "4";
-    private static final String PERSON_AGE_0 = "18";
-    private static final String PERSON_AGE_1 = "27";
+    private static final int AGE_THRESHOLD = 100;
 
-    private static final String RELATION_ID = "2333";
-    private static final Long LONG_RELATION_ID = 2333L;
-    private static final String RELATION_NAME = "brother";
-
-    //    private final Person person = new Person(PERSON_ID, PERSON_NAME, PERSON_AGE);
-    private final Person person = new Person();
-    private final Person person0 = new Person();
-    private final Person person1 = new Person();
-    private final Relation relation = new Relation();
     private final Network network = new Network();
 
     private final Logger log = LoggerFactory.getLogger(GraphyApplication.class);
@@ -61,34 +45,46 @@ public class GraphyApplication {
 
     @PostConstruct
     public void setup() {
+        this.log.info("Deleting existing g");
         try {
             this.networkRepo.deleteAll();
         } catch (Exception e) {
             this.log.error(e.getMessage(), e);
         }
+        this.log.info("Creating vertices");
 
-        this.person.setAge(PERSON_AGE);
-        this.person0.setAge(PERSON_AGE_0);
-        this.person1.setAge(PERSON_AGE_1);
-        this.person.setName(PERSON_NAME);
-        this.person0.setName(PERSON_NAME_0);
-        this.person1.setName(PERSON_NAME_0);
+        final int VERTICES_THRESHOLD = 100;
 
-        final Person savedPerson = this.personRepo.save(this.person);
-        final Person savedPerson0 = this.personRepo.save(this.person0);
-        final Person savedPerson1 = this.personRepo.save(this.person1);
+        final Set<Person> savedPersons = new HashSet<>();
+        for (int i = 0; i < VERTICES_THRESHOLD; i++) {
+            final Person person = new Person();
+            person.setName(UUID.randomUUID().toString());
+            final int randomThreshold = ThreadLocalRandom.current().nextInt(0, AGE_THRESHOLD);
+            person.setAge(String.valueOf(randomThreshold));
+            final Person savedPerson = this.personRepo.save(person);
+            this.log.info("Vertex saved: " + savedPerson.getId());
+            savedPersons.add(savedPerson);
+        }
+        this.log.info("Creating edges");
 
-        this.network.getVertexes().add(savedPerson);
-        this.network.getVertexes().add(savedPerson0);
-        this.network.getVertexes().add(savedPerson1);
-//
-        this.relation.setName(RELATION_NAME);
-        this.relation.setPersonFrom(savedPerson);
-        this.relation.setPersonTo(savedPerson0);
+        final Set<Relation> savedRelations = new HashSet<Relation>();
+        for (final Person savedPerson : savedPersons) {
+            for (final Person savedPerson1 : savedPersons) {
+                final Relation relation = new Relation();
+                relation.setName("linkedTo");
+                relation.setPersonFrom(savedPerson);
+                relation.setPersonTo(savedPerson1);
+                final Relation savedRelation = this.relationRepo.save(relation);
+                this.log.info("Created edge: " + savedRelation.getId());
+                savedRelations.add(savedRelation);
+            }
+        }
 
-        final Relation savedRelation = this.relationRepo.save(this.relation);
-        this.network.getEdges().add(savedRelation);
+        this.log.info("Creating graph");
+        this.network.getVertexes().addAll(savedPersons);
+        this.network.getEdges().addAll(savedRelations);
         final Network saved = this.networkRepo.save(this.network);
+        this.log.info("Saved graph " + saved.getId() + " " + saved.getEdges().size() + " " + saved.getVertexes().size());
     }
 }
 

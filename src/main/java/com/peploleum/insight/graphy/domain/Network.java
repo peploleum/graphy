@@ -29,4 +29,8 @@ public class Network {
     @VertexSet
     @Getter
     private List<Object> vertexes;
+
+    public Long getId() {
+        return id;
+    }
 }
