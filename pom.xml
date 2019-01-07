@@ -105,6 +105,21 @@
                     </executions>
                 </plugin>
                 <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <mainClass>${start-class}</mainClass>
+                        <executable>true</executable>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>build-info</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <groupId>com.google.cloud.tools</groupId>
                     <artifactId>jib-maven-plugin</artifactId>
                     <version>${jib-maven-plugin.version}</version>
