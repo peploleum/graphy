@@ -1,6 +1,9 @@
 spring:
   main:
     web-application-type: none
+#endpoint: 192.168.65.0
 endpoint: localhost
 port: 8182
-vertex-threshold: 10
+username: capgemini
+password: root
+vertex-threshold: 5

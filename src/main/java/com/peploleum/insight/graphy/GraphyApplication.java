@@ -101,6 +101,7 @@ public class GraphyApplication {
         this.network.getEdges().addAll(savedRelations);
         final Network saved = this.networkRepo.save(this.network);
         log.info("Saved graph " + saved.getId() + " " + saved.getEdges().size() + " " + saved.getVertexes().size());
+        log.info(String.valueOf(saved.getVertexes()));
     }
 }
 
