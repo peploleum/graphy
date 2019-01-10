@@ -39,10 +39,13 @@ public class Relation {
     private String name;
 
     @EdgeFrom
-    private Person personFrom;
+    private DataJanus objectFrom;
 
     @EdgeTo
-    private Person personTo;
+    private DataJanus objectTo;
+
+    //@EdgeTo
+    //private Biographics objectTo;
 
     public String getName() {
         return name;
@@ -52,20 +55,20 @@ public class Relation {
         this.name = name;
     }
 
-    public Person getPersonFrom() {
-        return personFrom;
+    public DataJanus getObjectFrom() {
+        return objectFrom;
     }
 
-    public void setPersonFrom(Person personFrom) {
-        this.personFrom = personFrom;
+    public void setObjectFrom(DataJanus objectFrom) {
+        this.objectFrom = objectFrom;
     }
 
-    public Person getPersonTo() {
-        return personTo;
+    public DataJanus getObjectTo() {
+        return objectTo;
     }
 
-    public void setPersonTo(Person personTo) {
-        this.personTo = personTo;
+    public void setObjectTo(DataJanus objectTo) {
+        this.objectTo = objectTo;
     }
 }
 

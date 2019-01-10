@@ -30,7 +30,9 @@ public class Person {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private String id;
+
+    private Long idInsight;
 
     private String name;
 

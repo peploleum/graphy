@@ -6,4 +6,4 @@ endpoint: localhost
 port: 8182
 username: capgemini
 password: root
-vertex-threshold: 5
+vertex-threshold: 3
