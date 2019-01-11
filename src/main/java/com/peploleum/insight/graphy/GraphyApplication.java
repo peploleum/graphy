@@ -87,7 +87,7 @@ public class GraphyApplication {
             savedPersons.add(savedPerson);
         }*/
 
-        log.info("Creating Biographics 1");
+        /*log.info("Creating Biographics 1");
         Long idBio = biographicsService.save("Vincent Dautreme", UUID.randomUUID().toString());
         log.info("Biographics created : "+biographicsService.findOne(idBio).toString());
 
@@ -102,7 +102,7 @@ public class GraphyApplication {
         log.info("Creating Relation between 1 and 2");
         String idRelation = relationService.save(idBio,idBio2,"connait", Type.Biographics, Type.Biographics);
 
-        log.info("Relation created : ");
+        log.info("Relation created : ");*/
 
 
         /*log.info("Creating edges");

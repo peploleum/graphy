@@ -1,6 +1,6 @@
 spring:
   main:
-    web-application-type: none
+    web-application-type: servlet
 #endpoint: 192.168.65.0
 endpoint: localhost
 port: 8182

@@ -1,65 +1,55 @@
 package com.peploleum.insight.graphy.web.rest;
 
+import com.peploleum.insight.graphy.Type;
 import com.peploleum.insight.graphy.domain.Biographics;
+import com.peploleum.insight.graphy.domain.Relation;
 import com.peploleum.insight.graphy.dto.BiographicsDTO;
+import com.peploleum.insight.graphy.dto.RelationDTO;
 import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
+import com.peploleum.insight.graphy.service.RelationServiceImpl;
 import com.peploleum.insight.graphy.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import org.apache.tinkerpop.gremlin.structure.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.Timed;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by nicmir on 10/01/2019.
- */
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
-import java.awt.print.Pageable;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * Created by nicmir on 11/01/2019.
+ */
+
 @RestController
-@RequestMapping(value = "/api", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-public class BiographicsResource {
+@RequestMapping("/api")
+    public class RelationResource {
 
-    private final Logger log = LoggerFactory.getLogger(BiographicsResource.class);
+    private final Logger log = LoggerFactory.getLogger(RelationResource.class);
 
-    private static final String ENTITY_NAME = "biographics";
+    private static final String ENTITY_NAME = "relation";
 
-    private final BiographicsServiceImpl biographicsService;
+    private final RelationServiceImpl relationService;
 
-    public BiographicsResource(BiographicsServiceImpl biographicsService) {
-        this.biographicsService = biographicsService;
+    public RelationResource(RelationServiceImpl relationService) {
+        this.relationService = relationService;
     }
 
-    /**
-     * POST  /biographics : Create a new biographics.
-     *
-     *
-     * @return the ResponseEntity with status 201 (Created) and with body the new biographicsDTO, or with status 400 (Bad Request) if the biographics has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @PostMapping("/biographics")
+
+    @PostMapping("/relation")
     //@Timed(millis = 1000)
-    public ResponseEntity<Long> createBiographics(@Valid @RequestBody BiographicsDTO biographicsDTO) throws URISyntaxException {
-        log.debug("REST request to save Biographics : {}", biographicsDTO);
+    public ResponseEntity<String> createRelation(@Valid @RequestBody RelationDTO relationDTO) throws URISyntaxException {
+        log.debug("REST request to save Relation : {}", relationDTO);
         //if (biographics.getId() != null) {
-            //throw new BadRequestAlertException("A new biographics cannot already have an ID", ENTITY_NAME, "idexists");
+        //throw new BadRequestAlertException("A new biographics cannot already have an ID", ENTITY_NAME, "idexists");
         //}
-        Long result = biographicsService.save(biographicsDTO.getName(), biographicsDTO.getIdMongo());
-        return ResponseEntity.created(new URI("/api/biographics/" + result.toString()))
-                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.toString()))
+        log.info("relationDTO.getIdJanusCible" + relationDTO.getIdJanusCible());
+        String result = relationService.save(Long.valueOf(relationDTO.getIdJanusSource()), Long.valueOf(relationDTO.getIdJanusCible()), relationDTO.getName(), Type.valueOf(relationDTO.getTypeSource()), Type.valueOf(relationDTO.getTypeCible()));
+        return ResponseEntity.created(new URI("/api/relation/" + result))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result))
                 .body(result);
     }
 
@@ -108,10 +98,10 @@ public class BiographicsResource {
      */
     @GetMapping("/biographics/{id}")
     //@Timed
-    public ResponseEntity<Biographics> getBiographics(@PathVariable String id) throws URISyntaxException {
+    public ResponseEntity<Relation> getRelation(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get Biographics : {}", id);
-        Optional<Biographics> biographics = biographicsService.findOne(Long.valueOf(id));
-        return ResponseUtil.wrapOrNotFound(biographics);
+        Optional<Relation> relation = relationService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(relation);
     }
 
     /**
@@ -122,10 +112,10 @@ public class BiographicsResource {
      */
     @DeleteMapping("/biographics/{id}")
     //@Timed
-    public ResponseEntity<Void> deleteBiographics(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRelation(@PathVariable String id) {
         log.debug("REST request to delete Biographics : {}", id);
-        biographicsService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        relationService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
 
     /**

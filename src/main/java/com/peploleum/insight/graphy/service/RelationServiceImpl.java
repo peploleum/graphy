@@ -55,7 +55,7 @@ public class RelationServiceImpl {
     }*/
     public String save(Long idSource, Long idCible, String name,Type typeSource,Type typeCible) {
 
-        log.debug("Request to save Biographics : {}");
+        log.debug("Request to save Relation : {}");
         Relation relation = new Relation();
 
         switch (typeSource){
