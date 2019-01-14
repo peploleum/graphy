@@ -1,6 +1,6 @@
 package com.peploleum.insight.graphy.service;
 
-import com.peploleum.insight.graphy.Type;
+import com.peploleum.insight.graphy.web.rest.Type;
 import com.peploleum.insight.graphy.domain.*;
 import com.peploleum.insight.graphy.repository.*;
 import org.slf4j.Logger;

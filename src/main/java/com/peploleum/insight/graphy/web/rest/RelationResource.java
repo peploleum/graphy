@@ -1,6 +1,5 @@
 package com.peploleum.insight.graphy.web.rest;
 
-import com.peploleum.insight.graphy.Type;
 import com.peploleum.insight.graphy.domain.Relation;
 import com.peploleum.insight.graphy.dto.RelationDTO;
 import com.peploleum.insight.graphy.service.RelationServiceImpl;
