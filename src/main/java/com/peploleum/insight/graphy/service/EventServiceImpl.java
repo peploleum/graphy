@@ -1,8 +1,6 @@
 package com.peploleum.insight.graphy.service;
 
-import com.peploleum.insight.graphy.domain.Equipment;
 import com.peploleum.insight.graphy.domain.Event;
-import com.peploleum.insight.graphy.repository.EquipmentRepository;
 import com.peploleum.insight.graphy.repository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +47,6 @@ public class EventServiceImpl {
      *
      * @param id the id of the entity
      */
-
     public void delete(Long id) {
         log.debug("Request to delete event : {}", id);
         eventRepository.deleteById(id);

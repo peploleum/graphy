@@ -1,13 +1,10 @@
 package com.peploleum.insight.graphy.web.rest;
 
-import com.peploleum.insight.graphy.domain.Biographics;
 import com.peploleum.insight.graphy.domain.Location;
-import com.peploleum.insight.graphy.dto.BiographicsDTO;
 import com.peploleum.insight.graphy.dto.LocationDTO;
-import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
 import com.peploleum.insight.graphy.service.LocationServiceImpl;
 import com.peploleum.insight.graphy.web.rest.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import com.peploleum.insight.graphy.web.rest.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

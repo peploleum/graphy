@@ -1,13 +1,10 @@
 package com.peploleum.insight.graphy.web.rest;
 
-import com.peploleum.insight.graphy.domain.Biographics;
 import com.peploleum.insight.graphy.domain.Event;
-import com.peploleum.insight.graphy.dto.BiographicsDTO;
 import com.peploleum.insight.graphy.dto.EventDTO;
-import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
 import com.peploleum.insight.graphy.service.EventServiceImpl;
 import com.peploleum.insight.graphy.web.rest.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import com.peploleum.insight.graphy.web.rest.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +30,7 @@ public class EventResource {
     public EventResource(EventServiceImpl eventService) {
         this.eventService = eventService;
     }
+
     @PostMapping("/event")
     public ResponseEntity<Long> createEvent(@Valid @RequestBody EventDTO eventDTO) throws URISyntaxException {
         log.debug("REST request to save Event : {}", eventDTO);

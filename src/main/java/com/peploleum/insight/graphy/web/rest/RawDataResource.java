@@ -1,16 +1,10 @@
 package com.peploleum.insight.graphy.web.rest;
 
-import com.peploleum.insight.graphy.domain.Biographics;
-import com.peploleum.insight.graphy.domain.Organisation;
 import com.peploleum.insight.graphy.domain.RawData;
-import com.peploleum.insight.graphy.dto.BiographicsDTO;
-import com.peploleum.insight.graphy.dto.OrganisationDTO;
 import com.peploleum.insight.graphy.dto.RawDataDTO;
-import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
-import com.peploleum.insight.graphy.service.OrganisationServiceImpl;
 import com.peploleum.insight.graphy.service.RawDataServiceImpl;
 import com.peploleum.insight.graphy.web.rest.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import com.peploleum.insight.graphy.web.rest.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +15,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-/**
- * Created by nicmir on 11/01/2019.
- */
 @RestController
 @RequestMapping("/api")
 public class RawDataResource {

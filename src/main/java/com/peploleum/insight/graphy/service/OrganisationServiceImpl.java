@@ -1,8 +1,6 @@
 package com.peploleum.insight.graphy.service;
 
-import com.peploleum.insight.graphy.domain.Location;
 import com.peploleum.insight.graphy.domain.Organisation;
-import com.peploleum.insight.graphy.repository.LocationRepository;
 import com.peploleum.insight.graphy.repository.OrganisationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-/**
- * Created by nicmir on 11/01/2019.
- */
 @Service
 public class OrganisationServiceImpl {
     private final Logger log = LoggerFactory.getLogger(OrganisationServiceImpl.class);
@@ -49,7 +44,6 @@ public class OrganisationServiceImpl {
      *
      * @param id the id of the entity
      */
-
     public void delete(Long id) {
         log.debug("Request to delete organisation : {}", id);
         organisationRepository.deleteById(id);

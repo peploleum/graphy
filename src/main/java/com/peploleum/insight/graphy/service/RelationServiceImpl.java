@@ -9,11 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
-/**
- * Created by nicmir on 10/01/2019.
- */
 @Service
 public class RelationServiceImpl {
 
@@ -29,10 +25,6 @@ public class RelationServiceImpl {
     private final OrganisationRepository organisationRepository;
     private final RawDataRepository rawDataRepository;
 
-    //private final BiographicsMapper biographicsMapper;
-
-    //private final BiographicsSearchRepository biographicsSearchRepository;
-
     public RelationServiceImpl(RelationRepository relationRepository, BiographicsRepository biographicsRepository, EquipmentRepository equipmentRepository, EventRepository eventRepository, LocationRepository locationRepository, OrganisationRepository organisationRepository, RawDataRepository rawDataRepository) {
         this.relationRepository = relationRepository;
         this.biographicsRepository = biographicsRepository;
@@ -43,22 +35,12 @@ public class RelationServiceImpl {
         this.rawDataRepository = rawDataRepository;
     }
 
-    /*@Override
-    public BiographicsDTO save(BiographicsDTO biographicsDTO) {
-        log.debug("Request to save Biographics : {}", biographicsDTO);
-
-        Biographics biographics = biographicsMapper.toEntity(biographicsDTO);
-        biographics = biographicsRepository.save(biographics);
-        BiographicsDTO result = biographicsMapper.toDto(biographics);
-        biographicsSearchRepository.save(biographics);
-        return result;
-    }*/
-    public String save(Long idSource, Long idCible, String name,Type typeSource,Type typeCible) {
+    public String save(Long idSource, Long idCible, String name, Type typeSource, Type typeCible) {
 
         log.debug("Request to save Relation : {}");
         Relation relation = new Relation();
 
-        switch (typeSource){
+        switch (typeSource) {
             case Event:
                 Event eventSource = eventRepository.findById(idSource).get();
                 relation.setObjectFrom(eventSource);
@@ -84,7 +66,7 @@ public class RelationServiceImpl {
                 relation.setObjectFrom(organisationSource);
                 break;
         }
-        switch (typeCible){
+        switch (typeCible) {
             case Event:
                 Event eventCible = eventRepository.findById(idCible).get();
                 relation.setObjectTo(eventCible);
@@ -116,15 +98,9 @@ public class RelationServiceImpl {
 
         relation = relationRepository.save(relation);
         String result = relation.getId();
-        this.log.info("Relation between : " + relation.getObjectFrom().toString() +" and "+ relation.getObjectTo().toString() +" saved: " + relation.getId());
+        this.log.info("Relation between : " + relation.getObjectFrom().toString() + " and " + relation.getObjectTo().toString() + " saved: " + relation.getId());
         return result;
     }
-
-    /*@Override
-    public Iterable<Biographics> findAll() {
-        log.debug("Request to get all Biographics");
-        return biographicsRepository.findAll().map(biographicsMapper::toDto);
-    }*/
 
 
     /**
@@ -133,7 +109,6 @@ public class RelationServiceImpl {
      * @param id the id of the entity
      * @return the entity
      */
-
     public Optional<Relation> findOne(String id) {
         log.debug("Request to get Biographics : {}", id);
         return relationRepository.findById(id);
@@ -149,18 +124,4 @@ public class RelationServiceImpl {
         log.debug("Request to delete Biographics : {}", id);
         relationRepository.deleteById(id);
     }
-
-    /**
-     * Search for the biographics corresponding to the query.
-     *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
-     */
-    /*@Override
-    public Page<BiographicsDTO> search(String query, Pageable pageable) {
-        log.debug("Request to search for a page of Biographics for query {}", query);
-        return biographicsSearchRepository.search(queryStringQuery(query), pageable)
-                .map(biographicsMapper::toDto);
-    }*/
 }
