@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.annotation.Persistent;
 import org.springframework.stereotype.Service;
-import sun.awt.image.ImageWatched;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -39,6 +38,12 @@ public class TraversalServiceImpl {
         this.template = new GremlinTemplate(this.gremlinFactory, converter);
     }
 
+    /**
+     * Fetches the neighbors for a given node. Source vertex is chosen based on 'id' property and all outgoing edges are walked (limit 50)
+     *
+     * @param node
+     * @return the neighbors
+     */
     public List<Node> getNeighbors(final Node node) {
         final List<Node> nodeList = new ArrayList<>();
         final String id = node.getId();
@@ -99,8 +104,7 @@ public class TraversalServiceImpl {
             final Object idInsight = properties.get(key);
             if (idInsight != null) {
                 final LinkedHashMap propertyList = (LinkedHashMap) ((ArrayList) idInsight).get(0);
-                if (propertyList != null)
-                {
+                if (propertyList != null) {
                     final String value = propertyList.get("value").toString();
                     return value;
                 }
