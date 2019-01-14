@@ -19,6 +19,14 @@ public class RawDataServiceImpl {
 
     }
 
+    /**
+     * Saves a Raw Data Vertex
+     *
+     * @param name    name of the Raw Data element
+     * @param idMongo unique Identifier in external database
+     * @param type    Type of Raw Data
+     * @return unique identifier in graph db
+     */
     public Long save(String name, String idMongo, String type) {
         log.debug("Request to save rawData : {}");
         RawData rawData = new RawData();
