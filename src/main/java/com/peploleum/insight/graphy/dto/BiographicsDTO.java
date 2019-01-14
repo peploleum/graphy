@@ -26,4 +26,6 @@ public class BiographicsDTO {
     public void setIdMongo(String idMongo) {
         this.idMongo = idMongo;
     }
+
+
 }
