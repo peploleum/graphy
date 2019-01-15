@@ -7,3 +7,4 @@ port: 8182
 username: capgemini
 password: root
 vertex-threshold: 3
+#debug: true
