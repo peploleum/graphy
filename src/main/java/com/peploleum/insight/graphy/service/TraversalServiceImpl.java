@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TraversalServiceImpl {
@@ -112,5 +113,47 @@ public class TraversalServiceImpl {
         }
         return null;
     }
+
+    /**
+     * Fetches the neighbors for a given node. Source vertex is chosen based on 'id' property and all outgoing edges are walked (limit 50)
+     *
+     * @param node
+     * @return the neighbors
+     */
+    public List<Node> getNeighborsMock(final String id) {
+        final List<Node> neighbors = generateNeighbors();
+        return neighbors;
+    }
+
+    public static List<Node> generateNeighbors() {
+        final List<Node> neighbors = new ArrayList<>();
+
+        final Node bioNode = new Node();
+        final String bioMongoId = UUID.randomUUID().toString();
+        bioNode.setId(bioMongoId);
+        bioNode.setLabel("Paul");
+        bioNode.setType("Biographics");
+        neighbors.add(bioNode);
+        Node eventNode = new Node();
+        final String eventMongoId = UUID.randomUUID().toString();
+        eventNode.setId(eventMongoId);
+        eventNode.setLabel("Bombing");
+        eventNode.setType("Event");
+        neighbors.add(eventNode);
+        final String eqMongoId = UUID.randomUUID().toString();
+        final Node eqNode = new Node();
+        eqNode.setId(eqMongoId);
+        eqNode.setLabel("Gun");
+        eqNode.setType("Equipment");
+        neighbors.add(eqNode);
+        final Node rawDataNode = new Node();
+        final String rawDataMongoId = UUID.randomUUID().toString();
+        rawDataNode.setId(rawDataMongoId);
+        rawDataNode.setLabel("Tweet");
+        rawDataNode.setType("RawData");
+        neighbors.add(rawDataNode);
+        return neighbors;
+    }
+
 
 }

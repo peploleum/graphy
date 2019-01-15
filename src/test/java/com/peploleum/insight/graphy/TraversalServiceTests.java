@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GraphyApplication.class)
@@ -38,6 +39,24 @@ public class TraversalServiceTests extends BasicGraphyTests {
         final List<Node> neighbors = this.traversalService.getNeighbors(node);
         this.log.info(neighbors.size() + " neighbors");
         neighbors.forEach((neighbor -> {
+            this.log.info(neighbor.toString());
+        }));
+    }
+
+    @Test
+    public void traversalMockTest() {
+        final List<Node> neighbors = this.traversalService.getNeighborsMock(UUID.randomUUID().toString());
+        this.log.info(neighbors.size() + " neighbors");
+        neighbors.forEach((neighbor -> {
+            this.log.info(neighbor.toString());
+        }));
+    }
+
+    @Test
+    public void generateNeighborsTest() {
+        final List<Node> nodes = TraversalServiceImpl.generateNeighbors();
+        this.log.info(nodes.size() + " neighbors");
+        nodes.forEach((neighbor -> {
             this.log.info(neighbor.toString());
         }));
     }
