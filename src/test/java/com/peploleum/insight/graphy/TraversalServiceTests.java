@@ -3,6 +3,7 @@ package com.peploleum.insight.graphy;
 import com.peploleum.insight.graphy.dto.Node;
 import com.peploleum.insight.graphy.service.TraversalServiceImpl;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +42,9 @@ public class TraversalServiceTests extends BasicGraphyTests {
         neighbors.forEach((neighbor -> {
             this.log.info(neighbor.toString());
         }));
+        Node properties = this.traversalService.getProperties(this.mongoId);
+        Assert.assertNotNull(properties);
+        this.log.info(properties.toString());
     }
 
     @Test

@@ -53,4 +53,23 @@ public class TraversalResource {
         return ResponseEntity.created(new URI("/api/traversal/"))
                 .body(neighbors);
     }
+
+    @GetMapping("/traversal/properties/{id}")
+    public ResponseEntity<Node> getProperties(@PathVariable String id) throws URISyntaxException {
+        log.debug("REST request to get properties for : {}", id);
+        final Node properties = this.traversalService.getProperties(id);
+        return ResponseEntity.created(new URI("/api/traversal/properties"))
+                .body(properties);
+    }
+
+    @GetMapping("/traversal/mock/properties/{id}")
+    public ResponseEntity<Node> getPropertiesMock(@PathVariable String id) throws URISyntaxException {
+        log.debug("REST request to get properties for : {}", id);
+        final Node properties = new Node();
+        properties.setId(id);
+        properties.setLabel("label");
+        properties.setType("RawData");
+        return ResponseEntity.created(new URI("/api/traversal/mock/properties"))
+                .body(properties);
+    }
 }

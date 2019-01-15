@@ -6,6 +6,7 @@ import com.microsoft.spring.data.gremlin.conversion.script.GremlinScriptLiteralV
 import com.microsoft.spring.data.gremlin.mapping.GremlinMappingContext;
 import com.microsoft.spring.data.gremlin.query.GremlinTemplate;
 import com.peploleum.insight.graphy.dto.Node;
+import org.apache.tinkerpop.gremlin.driver.Result;
 import org.apache.tinkerpop.gremlin.driver.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,29 +64,7 @@ public class TraversalServiceImpl {
             final String type = resultObject.get("label").toString();
             neighbor.setType(type);
             final String idInsight = smartOpenProperties(resultObject, "idInsight");
-            String searchKey = null;
-            switch (type) {
-                case "Biographics":
-                    searchKey = "biographicsName";
-                    break;
-                case "Event":
-                    searchKey = "eventName";
-                    break;
-                case "Equipment":
-                    searchKey = "equipmentName";
-                    break;
-                case "Location":
-                    searchKey = "locationName";
-                    break;
-                case "RawData":
-                    searchKey = "rawDataName";
-                    break;
-                case "Organisation":
-                    searchKey = "organisationName";
-                    break;
-                default:
-                    break;
-            }
+            String searchKey = findSearchKey(type);
             if (searchKey != null) {
                 neighbor.setId(idInsight);
                 final String label = smartOpenProperties(resultObject, searchKey);
@@ -97,6 +76,58 @@ public class TraversalServiceImpl {
             }
         });
         return nodeList;
+    }
+
+    public Node getProperties(final String id) {
+        final String mongoIdQuery = GremlinScriptLiteralVertex.generateHas("idInsight", id);
+        final ResultSet resultSet = this.template.getGremlinClient().submit("g.V()." + mongoIdQuery);
+        this.log.info("Parsing first result");
+        final Node foundNode = new Node();
+
+        final Result result = resultSet.stream().findFirst().get();
+        if (result == null) {
+            return null;
+        }
+        final LinkedHashMap resultObject = (LinkedHashMap) result.getObject();
+        final String type = resultObject.get("label").toString();
+        foundNode.setType(type);
+        foundNode.setId(id);
+        String searchKey = findSearchKey(type);
+        if (searchKey != null) {
+            final String label = smartOpenProperties(resultObject, searchKey);
+            if (label != null) {
+                foundNode.setLabel(label);
+                this.log.info("found node: " + foundNode.toString());
+            }
+        }
+        return foundNode;
+    }
+
+    private String findSearchKey(String type) {
+        String searchKey = null;
+        switch (type) {
+            case "Biographics":
+                searchKey = "biographicsName";
+                break;
+            case "Event":
+                searchKey = "eventName";
+                break;
+            case "Equipment":
+                searchKey = "equipmentName";
+                break;
+            case "Location":
+                searchKey = "locationName";
+                break;
+            case "RawData":
+                searchKey = "rawDataName";
+                break;
+            case "Organisation":
+                searchKey = "organisationName";
+                break;
+            default:
+                break;
+        }
+        return searchKey;
     }
 
     private String smartOpenProperties(LinkedHashMap object, String key) {
@@ -117,7 +148,7 @@ public class TraversalServiceImpl {
     /**
      * Fetches the neighbors for a given node. Source vertex is chosen based on 'id' property and all outgoing edges are walked (limit 50)
      *
-     * @param node
+     * @param id
      * @return the neighbors
      */
     public List<Node> getNeighborsMock(final String id) {

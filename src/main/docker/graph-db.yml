@@ -1,25 +1,5 @@
 version: '3'
 services:
-
-  elasticsearch:
-    container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
-    environment:
-    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    - "http.host=0.0.0.0"
-    - "transport.host=127.0.0.1"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9200"]
-      interval: 1s
-      timeout: 30s
-      retries: 30
-    ports:
-    - "9200:9200"
-    volumes:
-    - ./es/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-    networks:
-    - graph
-
   cassandra:
     container_name: cassandra
     image: cassandra:latest
@@ -42,9 +22,9 @@ services:
     #  - C:\dev\insight\src\main\docker\compose\graph\janus\conf\jvm.options:/etc/cassandra/jvm.options
     command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 0; fi && /docker-entrypoint.sh cassandra -f'
     networks:
-    - graph
+    - insight
 #volumes:
 #  named_vol:
 networks:
-  graph:
+  insight:
     external: true
