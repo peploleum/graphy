@@ -57,6 +57,7 @@ public class TraversalResourceTests extends BasicGraphyTests {
         final ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         final byte[] bytes = mapper.writeValueAsBytes(sourceNode);
+        this.log.info(mapper.writeValueAsString(sourceNode));
         this.restTraversalMockMvc.perform(post("/api/traversal")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(bytes))
