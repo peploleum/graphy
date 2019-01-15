@@ -31,4 +31,12 @@ public class EquipmentDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "EquipmentDTO{" +
+                "idMongo=" + getIdMongo() +
+                ", name='" + getName() + "'" +
+                "}";
+    }
 }

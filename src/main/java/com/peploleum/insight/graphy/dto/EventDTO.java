@@ -32,4 +32,12 @@ public class EventDTO {
     public void setDescrption(String descrption) {
         this.descrption = descrption;
     }
+
+    @Override
+    public String toString() {
+        return "EventDTO{" +
+                "idMongo=" + getIdMongo() +
+                ", name='" + getName() + "'" +
+                "}";
+    }
 }

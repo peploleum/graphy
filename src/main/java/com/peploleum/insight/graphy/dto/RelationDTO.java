@@ -54,5 +54,16 @@ public class RelationDTO {
     public void setTypeCible(String typeCible) {
         this.typeCible = typeCible;
     }
+
+    @Override
+    public String toString() {
+        return "RawDataDTO{" +
+                "idJanusSource=" + getIdJanusSource() +
+                "idJanusCible=" + getIdJanusCible() +
+                "typeSource=" + getTypeSource() +
+                "typeCible=" + getTypeCible() +
+                ", name='" + getName() + "'" +
+                "}";
+    }
 }
 

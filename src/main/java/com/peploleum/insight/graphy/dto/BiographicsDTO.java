@@ -24,5 +24,11 @@ public class BiographicsDTO {
         this.idMongo = idMongo;
     }
 
-
+    @Override
+    public String toString() {
+        return "BiographicsDTO{" +
+                "idMongo=" + getIdMongo() +
+                ", name='" + getName() + "'" +
+                "}";
+    }
 }

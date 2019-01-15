@@ -31,4 +31,12 @@ public class RawDataDTO {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "RawDataDTO{" +
+                "idMongo=" + getIdMongo() +
+                ", name='" + getName() + "'" +
+                "}";
+    }
 }

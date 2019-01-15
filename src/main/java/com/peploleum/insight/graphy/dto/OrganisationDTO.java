@@ -32,4 +32,12 @@ public class OrganisationDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "OrganisationDTO{" +
+                "idMongo=" + getIdMongo() +
+                ", name='" + getName() + "'" +
+                "}";
+    }
 }
