@@ -1,8 +1,5 @@
 package com.peploleum.insight.graphy.dto;
 
-/**
- * Created by nicmir on 10/01/2019.
- */
 public class BiographicsDTO {
     private String name;
 

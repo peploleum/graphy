@@ -1,14 +1,5 @@
 package com.peploleum.insight.graphy.dto;
 
-import com.microsoft.spring.data.gremlin.annotation.EdgeFrom;
-import com.microsoft.spring.data.gremlin.annotation.EdgeTo;
-import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
-import com.peploleum.insight.graphy.domain.DataJanus;
-import org.springframework.data.annotation.Id;
-
-/**
- * Created by nicmir on 11/01/2019.
- */
 public class RelationDTO {
 
     private String idJanusSource;
@@ -21,7 +12,7 @@ public class RelationDTO {
 
     private String typeCible;
 
-    public RelationDTO(){
+    public RelationDTO() {
     }
 
     public String getName() {

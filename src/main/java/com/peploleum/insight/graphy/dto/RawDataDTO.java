@@ -1,8 +1,5 @@
 package com.peploleum.insight.graphy.dto;
 
-/**
- * Created by nicmir on 11/01/2019.
- */
 public class RawDataDTO {
     private String idMongo;
     private String name;
