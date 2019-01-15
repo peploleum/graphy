@@ -8,3 +8,5 @@ username: capgemini
 password: root
 vertex-threshold: 3
 #debug: true
+server:
+  port: 8090
