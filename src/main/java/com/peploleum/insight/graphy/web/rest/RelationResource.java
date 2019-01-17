@@ -46,7 +46,7 @@ public class RelationResource {
      * @param id the id of the biographicsDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the biographicsDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/biographics/{id}")
+    @GetMapping("/relation/{id}")
     public ResponseEntity<Relation> getRelation(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get Biographics : {}", id);
         Optional<Relation> relation = relationService.findOne(id);
@@ -59,7 +59,7 @@ public class RelationResource {
      * @param id the id of the biographicsDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/biographics/{id}")
+    @DeleteMapping("/relation/{id}")
     public ResponseEntity<Void> deleteRelation(@PathVariable String id) {
         log.debug("REST request to delete Biographics : {}", id);
         relationService.delete(id);

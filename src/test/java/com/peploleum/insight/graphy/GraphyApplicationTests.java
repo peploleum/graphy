@@ -70,7 +70,7 @@ public class GraphyApplicationTests extends BasicGraphyTests {
         final String pauls = GremlinScriptLiteralVertex.generateHas("biographicsName", "John");
 
         final ResultSet resultSet = this.template.getGremlinClient().submit("g.V()." + pauls);
-        this.log.info("searhing by name: John");
+        this.log.info("searching by name: John");
         resultSet.stream().forEach(result -> {
             final LinkedHashMap resultObject = (LinkedHashMap) result.getObject();
             resultObject.keySet().stream().forEach((key -> {

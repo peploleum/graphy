@@ -122,6 +122,6 @@ public class RelationServiceImpl {
 
     public void delete(String id) {
         log.debug("Request to delete Biographics : {}", id);
-        relationRepository.deleteById(id);
+        relationRepository.myDeleteById(id);
     }
 }

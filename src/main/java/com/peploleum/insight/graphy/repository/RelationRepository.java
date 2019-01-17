@@ -18,10 +18,13 @@ package com.peploleum.insight.graphy.repository;
 
 import com.microsoft.spring.data.gremlin.repository.GremlinRepository;
 import com.peploleum.insight.graphy.domain.Relation;
+import org.springframework.data.annotation.QueryAnnotation;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface RelationRepository extends GremlinRepository<Relation, String> {
+public interface RelationRepository extends GremlinRepository<Relation, String>, RelationRepositoryCustom {
 
 }
 
