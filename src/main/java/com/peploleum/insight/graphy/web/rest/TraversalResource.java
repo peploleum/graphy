@@ -62,6 +62,14 @@ public class TraversalResource {
                 .body(properties);
     }
 
+    @GetMapping("/traversal/janus/{id}")
+    public ResponseEntity<Node> getByJanusId(@PathVariable String id) throws URISyntaxException {
+        log.info("REST request to get properties for : {}", id);
+        final Node properties = this.traversalService.getByJanusId(id);
+        return ResponseEntity.created(new URI("/api/traversal/janus"))
+                .body(properties);
+    }
+
     @GetMapping("/traversal/mock/properties/{id}")
     public ResponseEntity<Node> getPropertiesMock(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get properties for : {}", id);

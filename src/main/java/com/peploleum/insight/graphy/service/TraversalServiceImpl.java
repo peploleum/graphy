@@ -81,13 +81,45 @@ public class TraversalServiceImpl {
     public Node getProperties(final String id) {
         this.log.info("Searching Node with idInsight property: " + id);
         final String mongoIdQuery = GremlinScriptLiteralVertex.generateHas("idInsight", id);
-        final String gremlinQuery = "g.V()." + mongoIdQuery;
+        final long count = this.template.vertexCount();
+        this.log.info("COUNT: " + count);
+        final String gremlinQuery = "g.V()." + mongoIdQuery + ".next()";
         this.log.info("GremlinQuery: " + gremlinQuery);
         final ResultSet resultSet = this.template.getGremlinClient().submit(gremlinQuery);
         this.log.info("Parsing first result");
         final Node foundNode = new Node();
+        final Result result = resultSet.one();
+//        final Result result = resultSet.stream().findFirst().get();
+        if (result == null) {
+            this.log.info("No result");
+            return null;
+        }
+        this.log.info("Found result");
+        final LinkedHashMap resultObject = (LinkedHashMap) result.getObject();
+        final String type = resultObject.get("label").toString();
+        foundNode.setType(type);
+        foundNode.setId(id);
+        final String searchKey = findSearchKey(type);
+        this.log.info("Searching key: " + searchKey);
+        if (searchKey != null) {
+            final String label = smartOpenProperties(resultObject, searchKey);
+            if (label != null) {
+                foundNode.setLabel(label);
+                this.log.info("found node: " + foundNode.toString());
+            }
+        }
+        return foundNode;
+    }
 
-        final Result result = resultSet.stream().findFirst().get();
+    public Node getByJanusId(final String id) {
+        this.log.info("Searching Node with janusId property: " + id);
+        final String gremlinQuery = "g.V(" + id + ")";
+        this.log.info("GremlinQuery: " + gremlinQuery);
+        final ResultSet resultSet = this.template.getGremlinClient().submit(gremlinQuery);
+        this.log.info("Parsing first result");
+        final Node foundNode = new Node();
+        final Result result = resultSet.one();
+//        final Result result = resultSet.stream().findFirst().get();
         if (result == null) {
             this.log.info("No result");
             return null;
