@@ -79,20 +79,26 @@ public class TraversalServiceImpl {
     }
 
     public Node getProperties(final String id) {
+        this.log.info("Searching Node with idInsight property: " + id);
         final String mongoIdQuery = GremlinScriptLiteralVertex.generateHas("idInsight", id);
-        final ResultSet resultSet = this.template.getGremlinClient().submit("g.V()." + mongoIdQuery);
+        final String gremlinQuery = "g.V()." + mongoIdQuery;
+        this.log.info("GremlinQuery: " + gremlinQuery);
+        final ResultSet resultSet = this.template.getGremlinClient().submit(gremlinQuery);
         this.log.info("Parsing first result");
         final Node foundNode = new Node();
 
         final Result result = resultSet.stream().findFirst().get();
         if (result == null) {
+            this.log.info("No result");
             return null;
         }
+        this.log.info("Found result");
         final LinkedHashMap resultObject = (LinkedHashMap) result.getObject();
         final String type = resultObject.get("label").toString();
         foundNode.setType(type);
         foundNode.setId(id);
-        String searchKey = findSearchKey(type);
+        final String searchKey = findSearchKey(type);
+        this.log.info("Searching key: " + searchKey);
         if (searchKey != null) {
             final String label = smartOpenProperties(resultObject, searchKey);
             if (label != null) {

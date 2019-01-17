@@ -56,7 +56,7 @@ public class TraversalResource {
 
     @GetMapping("/traversal/properties/{id}")
     public ResponseEntity<Node> getProperties(@PathVariable String id) throws URISyntaxException {
-        log.debug("REST request to get properties for : {}", id);
+        log.info("REST request to get properties for : {}", id);
         final Node properties = this.traversalService.getProperties(id);
         return ResponseEntity.created(new URI("/api/traversal/properties"))
                 .body(properties);

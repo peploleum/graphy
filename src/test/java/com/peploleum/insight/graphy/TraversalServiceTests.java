@@ -42,7 +42,7 @@ public class TraversalServiceTests extends BasicGraphyTests {
         neighbors.forEach((neighbor -> {
             this.log.info(neighbor.toString());
         }));
-        Node properties = this.traversalService.getProperties(this.mongoId);
+        final Node properties = this.traversalService.getProperties(this.mongoId);
         Assert.assertNotNull(properties);
         this.log.info(properties.toString());
     }
