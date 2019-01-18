@@ -13,6 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Biographics extends DataJanus {
 
+
     private String biographicsName;
 
     private Integer biographicsAge;

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by nicmir on 09/01/2019.
  */
 @Repository
-public interface BiographicsRepository  extends GremlinRepository<Biographics, Long> {
+public interface BiographicsRepository  extends GremlinRepository<Biographics, Long>, BiographicsRepositoryCustom {
 }

@@ -2,11 +2,13 @@ package com.peploleum.insight.graphy.web.rest;
 
 import com.peploleum.insight.graphy.domain.Biographics;
 import com.peploleum.insight.graphy.dto.BiographicsDTO;
+import com.peploleum.insight.graphy.dto.Criteria;
 import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
 import com.peploleum.insight.graphy.web.rest.util.HeaderUtil;
 import com.peploleum.insight.graphy.web.rest.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +59,13 @@ public class BiographicsResource {
         log.debug("REST request to get Biographics : {}", id);
         Optional<Biographics> biographics = biographicsService.findOne(Long.valueOf(id));
         return ResponseUtil.wrapOrNotFound(biographics);
+    }
+
+    @PostMapping("/biographics/findByCriteria")
+    public ResponseEntity<Biographics> getBiographicsByCriteria(@Valid @RequestBody Criteria criteria) throws URISyntaxException {
+        log.debug("REST request to get Biographics : {}", criteria.getProperty());
+        Biographics biographics = biographicsService.findByCriteria(criteria);
+        return new ResponseEntity<Biographics>(biographics, HttpStatus.OK);
     }
 
     /**

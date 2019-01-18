@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by nicmir on 09/01/2019.
  */
 @Repository
-public interface LocationRepository extends GremlinRepository<Location, Long> {
+public interface LocationRepository extends GremlinRepository<Location, Long>, LocationRepositoryCustom {
 }
