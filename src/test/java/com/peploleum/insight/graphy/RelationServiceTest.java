@@ -64,7 +64,7 @@ public class RelationServiceTest extends BasicGraphyTests{
         resultObject.keySet().stream().forEach((key -> {
             this.log.info(key + " - " + resultObject.get(key).toString());
         }));
-        this.log.info("finished 2 !!");
+        this.log.info("finished !!");
     }
 
 
