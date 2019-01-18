@@ -21,9 +21,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.annotation.Persistent;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GraphyApplication.class)
 public class FeedTests extends BasicGraphyTests {
@@ -47,15 +44,10 @@ public class FeedTests extends BasicGraphyTests {
         mappingContext.setInitialEntitySet(new EntityScanner(this.context).scan(Persistent.class));
         final MappingGremlinConverter converter = new MappingGremlinConverter(mappingContext);
         this.template = new GremlinTemplate(this.gremlinFactory, converter);
-        this.template.getGremlinClient().submit("graph.tx().rollback()").all();
-        this.template.getGremlinClient().submit("mgmt = graph.openManagement()").all();
-        this.template.getGremlinClient().submit(" idInsight = mgmt.getPropertyKey('idInsight')").all();
-        this.template.getGremlinClient().submit("mgmt.buildIndex('byNameComposite', Vertex.class).addKey(idInsight).buildCompositeIndex()").all();
-        this.template.getGremlinClient().submit("mgmt.commit()").all();
     }
 
     @Test
-    public void getNeighborsTest() throws Exception {
+    public void feedTest() throws Exception {
         Result one = this.template.getGremlinClient().submit("graph.openManagement().containsGraphIndex(\'byNameComposite\')").one();
         this.log.info(one.toString());
         String randomBiographicsId = null;
@@ -75,5 +67,21 @@ public class FeedTests extends BasicGraphyTests {
 
     }
 
+    @Test
+    public void singleFeedTest() {
+        Result one = this.template.getGremlinClient().submit("graph.openManagement().containsGraphIndex(\'byNameComposite\')").one();
+        this.log.info(one.toString());
+    }
+
+    @Test
+    public void checkIndex() {
+        Result one = this.template.getGremlinClient().submit("graph.openManagement().containsGraphIndex(\'byNameComposite\')").one();
+        this.log.info(one.toString());
+        final String specificBiographics = this.createSpecificBiographics();
+        final Node byJanusId = this.traversalService.getByJanusId(specificBiographics);
+        final Node properties = this.traversalService.getProperties(this.mongoId);
+        Assert.assertNotNull(byJanusId);
+        Assert.assertNotNull(properties);
+    }
 }
 

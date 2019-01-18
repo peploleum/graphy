@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +25,10 @@ public class ManagementResource {
         this.managementService = managementService;
     }
 
-    @PostMapping("/create-index")
+    @GetMapping("/create-index")
     public ResponseEntity<List<Node>> createIndexes() {
         log.info("Creating indexes");
+        this.managementService.buildIndex("idInsight");
         return ResponseEntity.ok().build();
     }
 }
