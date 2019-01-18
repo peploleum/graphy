@@ -12,6 +12,9 @@ globals << [hook: [
             } else {
                 mgmt = graph.openManagement()
                 propertyKey = mgmt.getPropertyKey('idInsight')
+                if (propertyKey == null) {
+                    propertyKey = mgmt.makePropertyKey('idInsight').dataType(String.class).make()
+                }
                 ctx.logger.warn("property key  : " + propertyKey.toString())
                 compositeIndex = mgmt.buildIndex('insightIdNameComposite', Vertex.class).addKey(propertyKey).buildCompositeIndex()
                 ctx.logger.warn("compositeIndex  : " + compositeIndex.toString())

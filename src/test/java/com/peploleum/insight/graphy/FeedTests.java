@@ -48,7 +48,7 @@ public class FeedTests extends BasicGraphyTests {
 
     @Test
     public void feedTest() throws Exception {
-        Result one = this.template.getGremlinClient().submit("graph.openManagement().containsGraphIndex(\'byNameComposite\')").one();
+        Result one = this.template.getGremlinClient().submit("graph.openManagement().containsGraphIndex(\'insightIdNameComposite\')").one();
         this.log.info(one.toString());
         String randomBiographicsId = null;
         for (int i = 0; i < 100; i++) {
@@ -69,8 +69,13 @@ public class FeedTests extends BasicGraphyTests {
 
     @Test
     public void singleFeedTest() {
-        Result one = this.template.getGremlinClient().submit("graph.openManagement().containsGraphIndex(\'byNameComposite\')").one();
+        Result one = this.template.getGremlinClient().submit("graph.openManagement().containsGraphIndex(\'insightIdNameComposite\')").one();
         this.log.info(one.toString());
+        final String specificBiographics = this.createSpecificBiographics();
+        final Node byJanusId = this.traversalService.getByJanusId(specificBiographics);
+        final Node properties = this.traversalService.getProperties(this.mongoId);
+        Assert.assertNotNull(byJanusId);
+        Assert.assertNotNull(properties);
     }
 
     @Test

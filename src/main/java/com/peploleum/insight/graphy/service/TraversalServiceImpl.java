@@ -81,8 +81,6 @@ public class TraversalServiceImpl {
     public Node getProperties(final String id) {
         this.log.info("Searching Node with idInsight property: " + id);
         final String mongoIdQuery = GremlinScriptLiteralVertex.generateHas("idInsight", id);
-        final long count = this.template.vertexCount();
-        this.log.info("COUNT: " + count);
         final String gremlinQuery = "g.V()." + mongoIdQuery + ".next()";
         final Node foundNode = internalGetNode(id, gremlinQuery);
         if (foundNode == null) return null;
