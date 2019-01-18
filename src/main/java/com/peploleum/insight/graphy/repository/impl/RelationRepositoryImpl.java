@@ -8,7 +8,6 @@ import com.microsoft.spring.data.gremlin.query.GremlinOperations;
 import com.microsoft.spring.data.gremlin.query.GremlinTemplate;
 import com.peploleum.insight.graphy.repository.RelationRepository;
 import com.peploleum.insight.graphy.repository.RelationRepositoryCustom;
-import org.apache.tinkerpop.gremlin.driver.Client;
 import org.apache.tinkerpop.gremlin.driver.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,16 +50,25 @@ public class RelationRepositoryImpl implements RelationRepositoryCustom {
 
     @Override
     public void myDeleteById(String id) {
-        final String relationId = GremlinScriptLiteralVertex.generateHas("biographicsName", "test");
-        final ResultSet resultSet = this.template.getGremlinClient().submit("g.E(57464)");
+        final ResultSet resultSet3 = this.template.getGremlinClient().submit("g.E('"+id+"')");
+        final ResultSet resultSet = this.template.getGremlinClient().submit("g.E('"+id+"').drop()");
+        final ResultSet resultSet2 = this.template.getGremlinClient().submit("g.E('"+id+"')");
+        LinkedHashMap resultObjTest = (LinkedHashMap) resultSet2.one().getObject();
+    }
+    @Override
+    public LinkedHashMap findOne(String id) {
+        final ResultSet resultSet = this.template.getGremlinClient().submit("g.E('"+id+"')");
         this.log.info("searching by id:" + id);
-        resultSet.stream().forEach(result -> {
+
+        /*final LinkedHashMap resultRel = resultSet.stream().map(result -> {
             final LinkedHashMap resultObject = (LinkedHashMap) result.getObject();
             resultObject.keySet().stream().forEach((key -> {
                 this.log.info(key + " - " + resultObject.get(key).toString());
             }));
-        });
-        this.log.info("finished");
-        //this.relationRepository.deleteById(id);
+            return resultObject;
+        }).collect();*/
+
+        LinkedHashMap resultObjTest = (LinkedHashMap) resultSet.one().getObject();
+        return resultObjTest;
     }
 }
