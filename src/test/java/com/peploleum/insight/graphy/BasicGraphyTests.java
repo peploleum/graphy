@@ -98,6 +98,17 @@ public class BasicGraphyTests {
         this.relationService.save(locationId, outerLocationId, "linked to", Type.Location, Type.Location);
     }
 
+    public String createRandomBiographics() {
+        final String outerBiographicsMongoId = UUID.randomUUID().toString();
+        final Long outerBiographicsId = this.biographicsService.save(UUID.randomUUID().toString(), outerBiographicsMongoId);
+        return String.valueOf(outerBiographicsId);
+    }
+
+    public String createSpecificBiographics() {
+        final Long outerBiographicsId = this.biographicsService.save(UUID.randomUUID().toString(), this.mongoId);
+        return String.valueOf(outerBiographicsId);
+    }
+
     @Test
     public void injectionTest() {
         Assert.assertNotNull(this.networkRepository);
