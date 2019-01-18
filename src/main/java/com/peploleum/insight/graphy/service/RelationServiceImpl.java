@@ -1,5 +1,6 @@
 package com.peploleum.insight.graphy.service;
 
+import com.peploleum.insight.graphy.dto.RelationDTO;
 import com.peploleum.insight.graphy.web.rest.Type;
 import com.peploleum.insight.graphy.domain.*;
 import com.peploleum.insight.graphy.repository.*;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 @Service
@@ -109,9 +111,9 @@ public class RelationServiceImpl {
      * @param id the id of the entity
      * @return the entity
      */
-    public Optional<Relation> findOne(String id) {
+    public LinkedHashMap findOne(String id) {
         log.debug("Request to get Biographics : {}", id);
-        return relationRepository.findById(id);
+        return relationRepository.findOne(id);
     }
 
     /**
@@ -124,4 +126,10 @@ public class RelationServiceImpl {
         log.debug("Request to delete Biographics : {}", id);
         relationRepository.myDeleteById(id);
     }
+
+    //public Optional<Relation> findByCriteria(CriteriaDTO){}
+
+    //public Iterable<Relation> findAllBetweenObjects(){}
+
+    //public Iterable<Relation> findRelationsByName(){}
 }

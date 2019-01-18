@@ -45,6 +45,8 @@ public class BasicGraphyTests {
 
     protected String mongoId = UUID.randomUUID().toString();
 
+    private String idRelation;
+
     protected void createCustomGraph() {
         //inner ring
         final Long biographicsId = this.biographicsService.save("Paul", mongoId);
@@ -81,7 +83,7 @@ public class BasicGraphyTests {
         this.relationService.save(rawDataId, locationId, "linked to", Type.RawData, Type.Location);
 
         //outer ring
-        this.relationService.save(biographicsId, outerBiographicsId, "linked to", Type.Biographics, Type.Biographics);
+        idRelation = this.relationService.save(biographicsId, outerBiographicsId, "linked to", Type.Biographics, Type.Biographics);
         this.relationService.save(biographicsId, locationId, "linked to", Type.Biographics, Type.Location);
         this.relationService.save(biographicsId, equipmentId, "linked to", Type.Biographics, Type.Equipment);
         this.relationService.save(biographicsId, eventId, "linked to", Type.Biographics, Type.Event);
@@ -119,5 +121,8 @@ public class BasicGraphyTests {
         Assert.assertNotNull(this.organisationService);
     }
 
+    public String getIdRelation(){
+        return this.idRelation;
+    }
 }
 

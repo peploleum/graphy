@@ -25,6 +25,5 @@ import java.util.Optional;
 
 @Repository
 public interface RelationRepository extends GremlinRepository<Relation, String>, RelationRepositoryCustom {
-
 }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 @RestController
@@ -47,10 +48,10 @@ public class RelationResource {
      * @return the ResponseEntity with status 200 (OK) and with body the biographicsDTO, or with status 404 (Not Found)
      */
     @GetMapping("/relation/{id}")
-    public ResponseEntity<Relation> getRelation(@PathVariable String id) throws URISyntaxException {
+    public @ResponseBody String getRelation(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get Biographics : {}", id);
-        Optional<Relation> relation = relationService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(relation);
+        LinkedHashMap relation = relationService.findOne(id);
+        return relation.get(1).toString();
     }
 
     /**
