@@ -1,22 +1,15 @@
 package com.peploleum.insight.graphy;
 
-import com.microsoft.spring.data.gremlin.conversion.MappingGremlinConverter;
-import com.microsoft.spring.data.gremlin.mapping.GremlinMappingContext;
-import com.microsoft.spring.data.gremlin.query.GremlinTemplate;
 import com.peploleum.insight.graphy.domain.Biographics;
 import com.peploleum.insight.graphy.dto.Criteria;
 import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScanner;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.annotation.Persistent;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.UUID;
 

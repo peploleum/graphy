@@ -21,7 +21,6 @@ import java.util.UUID;
 public class TraversalServiceTests extends BasicGraphyTests {
 
     private final Logger log = LoggerFactory.getLogger(TraversalServiceTests.class);
-    //inner ring
 
     @Autowired
     private TraversalServiceImpl traversalService;
@@ -39,9 +38,7 @@ public class TraversalServiceTests extends BasicGraphyTests {
         node.setLabel("Paul");
         final List<Node> neighbors = this.traversalService.getNeighbors(node);
         this.log.info(neighbors.size() + " neighbors");
-        neighbors.forEach((neighbor -> {
-            this.log.info(neighbor.toString());
-        }));
+        neighbors.forEach((neighbor -> this.log.info(neighbor.toString())));
         final Node properties = this.traversalService.getProperties(this.mongoId);
         Assert.assertNotNull(properties);
         this.log.info(properties.toString());
@@ -51,18 +48,14 @@ public class TraversalServiceTests extends BasicGraphyTests {
     public void traversalMockTest() {
         final List<Node> neighbors = this.traversalService.getNeighborsMock(UUID.randomUUID().toString());
         this.log.info(neighbors.size() + " neighbors");
-        neighbors.forEach((neighbor -> {
-            this.log.info(neighbor.toString());
-        }));
+        neighbors.forEach((neighbor -> this.log.info(neighbor.toString())));
     }
 
     @Test
     public void generateNeighborsTest() {
         final List<Node> nodes = TraversalServiceImpl.generateNeighbors();
         this.log.info(nodes.size() + " neighbors");
-        nodes.forEach((neighbor -> {
-            this.log.info(neighbor.toString());
-        }));
+        nodes.forEach((neighbor -> this.log.info(neighbor.toString())));
     }
 
     @After

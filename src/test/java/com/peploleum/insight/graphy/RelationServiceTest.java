@@ -59,7 +59,6 @@ public class RelationServiceTest extends BasicGraphyTests{
 
     @Test
     public void relationFindOneTest() {
-        final String mongoId = UUID.randomUUID().toString();
         final LinkedHashMap resultObject = this.relationService.findOne(getIdRelation());
         resultObject.keySet().stream().forEach((key -> {
             this.log.info(key + " - " + resultObject.get(key).toString());
@@ -71,7 +70,6 @@ public class RelationServiceTest extends BasicGraphyTests{
     @Test
     public void relationDeleteTest() {
         createCustomGraph();
-        final String mongoId = UUID.randomUUID().toString();
         this.relationService.delete(getIdRelation());
     }
 
