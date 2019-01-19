@@ -32,7 +32,7 @@ public class OrganisationResource {
     public ResponseEntity<Long> createOrganisation(@Valid @RequestBody OrganisationDTO organisationDTO) throws URISyntaxException {
         log.debug("REST request to save Organisation : {}", organisationDTO);
 
-        Long result = organisationService.save(organisationDTO.getName(), organisationDTO.getIdMongo(), organisationDTO.getDescription());
+        Long result = organisationService.save(organisationDTO.getOrganisationName(), organisationDTO.getId(), organisationDTO.getOrganisationDescrption());
         return ResponseEntity.created(new URI("/api/organisation/" + result.toString()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.toString()))
                 .body(result);

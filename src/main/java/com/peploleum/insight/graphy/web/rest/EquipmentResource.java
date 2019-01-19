@@ -31,7 +31,7 @@ public class EquipmentResource {
     @PostMapping("/equipment")
     public ResponseEntity<Long> createEquipment(@Valid @RequestBody EquipmentDTO equipmentDTO) throws URISyntaxException {
         log.debug("REST request to save Equipment : {}", equipmentDTO);
-        Long result = equipmentService.save(equipmentDTO.getName(), equipmentDTO.getIdMongo());
+        Long result = equipmentService.save(equipmentDTO.getEquipmentName(), equipmentDTO.getId());
         return ResponseEntity.created(new URI("/api/equipment/" + result.toString()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.toString()))
                 .body(result);

@@ -34,7 +34,7 @@ public class EventResource {
     @PostMapping("/event")
     public ResponseEntity<Long> createEvent(@Valid @RequestBody EventDTO eventDTO) throws URISyntaxException {
         log.debug("REST request to save Event : {}", eventDTO);
-        Long result = eventService.save(eventDTO.getName(), eventDTO.getIdMongo());
+        Long result = eventService.save(eventDTO.getEventName(), eventDTO.getId());
         return ResponseEntity.created(new URI("/api/event/" + result.toString()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.toString()))
                 .body(result);

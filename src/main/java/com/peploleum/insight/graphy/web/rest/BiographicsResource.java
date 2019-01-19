@@ -41,7 +41,7 @@ public class BiographicsResource {
     @PostMapping("/biographics")
     public ResponseEntity<Long> createBiographics(@Valid @RequestBody BiographicsDTO biographicsDTO) throws URISyntaxException {
         log.debug("REST request to save Biographics : {}", biographicsDTO);
-        Long result = biographicsService.save(biographicsDTO.getName(), biographicsDTO.getIdMongo());
+        Long result = biographicsService.save(biographicsDTO.getBiographicsName(), biographicsDTO.getId());
         return ResponseEntity.created(new URI("/api/biographics/" + result.toString()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.toString()))
                 .body(result);

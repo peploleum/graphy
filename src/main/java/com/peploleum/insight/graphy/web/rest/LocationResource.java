@@ -34,7 +34,7 @@ public class LocationResource {
     @PostMapping("/location")
     public ResponseEntity<Long> createLocation(@Valid @RequestBody LocationDTO locationDTO) throws URISyntaxException {
         log.debug("REST request to save Biographics : {}", locationDTO);
-        Long result = locationService.save(locationDTO.getName(), locationDTO.getIdMongo());
+        Long result = locationService.save(locationDTO.getLocationName(), locationDTO.getId());
         return ResponseEntity.created(new URI("/api/location/" + result.toString()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.toString()))
                 .body(result);

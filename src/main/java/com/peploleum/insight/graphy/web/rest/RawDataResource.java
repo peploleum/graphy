@@ -28,24 +28,24 @@ public class RawDataResource {
         this.rawDataService = rawDataService;
     }
 
-    @PostMapping("/rawdata")
+    @PostMapping("/raw-data")
     public ResponseEntity<Long> createRawData(@Valid @RequestBody RawDataDTO rawDataDTO) throws URISyntaxException {
         log.debug("REST request to save RawData : {}", rawDataDTO);
 
-        Long result = rawDataService.save(rawDataDTO.getName(), rawDataDTO.getIdMongo(), rawDataDTO.getType());
+        Long result = rawDataService.save(rawDataDTO.getRawDataName(), rawDataDTO.getId(), rawDataDTO.getRawDataType());
         return ResponseEntity.created(new URI("/api/rawdata/" + result.toString()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.toString()))
                 .body(result);
     }
 
-    @GetMapping("/rawdata/{id}")
+    @GetMapping("/raw-data/{id}")
     public ResponseEntity<RawData> getRawData(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get RawData : {}", id);
         Optional<RawData> rawData = rawDataService.findOne(Long.valueOf(id));
         return ResponseUtil.wrapOrNotFound(rawData);
     }
 
-    @DeleteMapping("/rawdata/{id}")
+    @DeleteMapping("/raw-data/{id}")
     public ResponseEntity<Void> deleteOrganisation(@PathVariable Long id) {
         log.debug("REST request to delete RawData : {}", id);
         rawDataService.delete(id);

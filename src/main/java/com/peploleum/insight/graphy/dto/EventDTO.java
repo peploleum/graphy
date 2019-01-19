@@ -1,43 +1,150 @@
 package com.peploleum.insight.graphy.dto;
 
-public class EventDTO {
+import com.peploleum.insight.graphy.domain.enumeration.EventType;
 
-    private String idMongo;
-    private String name;
-    private String descrption;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.Objects;
 
-    public EventDTO() {
+/**
+ * A DTO for the Event entity.
+ */
+public class EventDTO implements Serializable {
+
+    private String id;
+
+    @NotNull
+    private String eventName;
+
+    private String eventDescription;
+
+    private EventType eventType;
+
+    private Instant eventDate;
+
+    private String eventCoordinates;
+
+    private byte[] eventImage;
+    private String eventImageContentType;
+
+    private String eventSymbol;
+
+    private String externalId;
+
+    public String getId() {
+        return id;
     }
 
-    public String getIdMongo() {
-        return idMongo;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setIdMongo(String idMongo) {
-        this.idMongo = idMongo;
+    public String getEventName() {
+        return eventName;
     }
 
-    public String getName() {
-        return name;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEventDescription() {
+        return eventDescription;
     }
 
-    public String getDescrption() {
-        return descrption;
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
-    public void setDescrption(String descrption) {
-        this.descrption = descrption;
+    public EventType getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public Instant getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Instant eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public String getEventCoordinates() {
+        return eventCoordinates;
+    }
+
+    public void setEventCoordinates(String eventCoordinates) {
+        this.eventCoordinates = eventCoordinates;
+    }
+
+    public byte[] getEventImage() {
+        return eventImage;
+    }
+
+    public void setEventImage(byte[] eventImage) {
+        this.eventImage = eventImage;
+    }
+
+    public String getEventImageContentType() {
+        return eventImageContentType;
+    }
+
+    public void setEventImageContentType(String eventImageContentType) {
+        this.eventImageContentType = eventImageContentType;
+    }
+
+    public String getEventSymbol() {
+        return eventSymbol;
+    }
+
+    public void setEventSymbol(String eventSymbol) {
+        this.eventSymbol = eventSymbol;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        EventDTO eventDTO = (EventDTO) o;
+        if (eventDTO.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), eventDTO.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 
     @Override
     public String toString() {
         return "EventDTO{" +
-                "idMongo=" + getIdMongo() +
-                ", name='" + getName() + "'" +
+                "id=" + getId() +
+                ", eventName='" + getEventName() + "'" +
+                ", eventDescription='" + getEventDescription() + "'" +
+                ", eventType='" + getEventType() + "'" +
+                ", eventDate='" + getEventDate() + "'" +
+                ", eventCoordinates='" + getEventCoordinates() + "'" +
+                ", eventImage='" + getEventImage() + "'" +
+                ", eventSymbol='" + getEventSymbol() + "'" +
+                ", externalId='" + getExternalId() + "'" +
                 "}";
     }
 }
