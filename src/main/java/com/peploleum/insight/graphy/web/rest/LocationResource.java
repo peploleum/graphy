@@ -31,7 +31,7 @@ public class LocationResource {
         this.locationService = locationService;
     }
 
-    @PostMapping("/location")
+    @PostMapping("/locations")
     public ResponseEntity<Long> createLocation(@Valid @RequestBody LocationDTO locationDTO) throws URISyntaxException {
         log.debug("REST request to save Biographics : {}", locationDTO);
         Long result = locationService.save(locationDTO.getLocationName(), locationDTO.getId());
@@ -40,14 +40,14 @@ public class LocationResource {
                 .body(result);
     }
 
-    @GetMapping("/location/{id}")
+    @GetMapping("/locations/{id}")
     public ResponseEntity<Location> getLocation(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get Location : {}", id);
         Optional<Location> location = locationService.findOne(Long.valueOf(id));
         return ResponseUtil.wrapOrNotFound(location);
     }
 
-    @DeleteMapping("/location/{id}")
+    @DeleteMapping("/locations/{id}")
     public ResponseEntity<Void> deleteLocation(@PathVariable Long id) {
         log.debug("REST request to delete Location : {}", id);
         locationService.delete(id);
