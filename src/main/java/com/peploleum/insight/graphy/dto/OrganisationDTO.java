@@ -1,7 +1,8 @@
 package com.peploleum.insight.graphy.dto;
 
+import com.peploleum.insight.graphy.domain.enumeration.Size;
+
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
