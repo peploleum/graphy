@@ -2,6 +2,7 @@ package com.peploleum.insight.graphy.dto;
 
 public class Node {
     private String id;
+    private String mongoId;
     private String label;
     private String type;
 
@@ -29,10 +30,19 @@ public class Node {
         this.type = type;
     }
 
+    public String getMongoId() {
+        return mongoId;
+    }
+
+    public void setMongoId(String mongoId) {
+        this.mongoId = mongoId;
+    }
+
     @Override
     public String toString() {
         return "Node{" +
                 "id=" + getId() +
+                ", mongoId=" + getMongoId() +
                 ", type='" + getType() + "'" +
                 ", label='" + getLabel() + "'" +
                 "}";

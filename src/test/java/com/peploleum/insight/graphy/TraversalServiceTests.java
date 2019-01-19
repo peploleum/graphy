@@ -32,16 +32,16 @@ public class TraversalServiceTests extends BasicGraphyTests {
 
     @Test
     public void traversalTest() {
-        final Node node = new Node();
-        node.setType("Biographics");
-        node.setId(this.mongoId);
-        node.setLabel("Paul");
-        final List<Node> neighbors = this.traversalService.getNeighbors(node);
+        final Node byMongoId = this.traversalService.getByMongoId(this.mongoId);
+        Assert.assertNotNull(byMongoId);
+        Assert.assertNotNull(byMongoId.getMongoId());
+        Assert.assertNotNull(byMongoId.getId());
+        final List<Node> neighbors = this.traversalService.getNeighbors(byMongoId);
         this.log.info(neighbors.size() + " neighbors");
         neighbors.forEach((neighbor -> this.log.info(neighbor.toString())));
-        final Node properties = this.traversalService.getProperties(this.mongoId);
-        Assert.assertNotNull(properties);
-        this.log.info(properties.toString());
+        final Node byJanusId = this.traversalService.getByJanusId(byMongoId.getId());
+        Assert.assertNotNull(byJanusId);
+        this.log.info(byJanusId.toString());
     }
 
     @Test

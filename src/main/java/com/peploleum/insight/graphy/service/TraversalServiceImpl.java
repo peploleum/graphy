@@ -49,10 +49,9 @@ public class TraversalServiceImpl {
     public List<Node> getNeighbors(final Node node) {
         final List<Node> nodeList = new ArrayList<>();
         final String id = node.getId();
-        this.log.info("searching by external Id: " + id + " and traversing outgoing edges to get neighbors");
+        this.log.info("searching by kanus Id: " + id + " and traversing outgoing edges to get neighbors");
         final String neighborSuffix = ".outE().limit(50).inV().toList()";
-        final String mongoIdQuery = GremlinScriptLiteralVertex.generateHas("idInsight", id);
-        final ResultSet neighborResultSet = this.template.getGremlinClient().submit("g.V()." + mongoIdQuery + neighborSuffix);
+        final ResultSet neighborResultSet = this.template.getGremlinClient().submit("g.V(" + id + ")" + neighborSuffix);
         this.log.info("Parsing neighbors");
         neighborResultSet.stream().forEach(result -> {
             this.log.info("------------");
@@ -62,11 +61,13 @@ public class TraversalServiceImpl {
             }));
             final Node neighbor = new Node();
             final String type = resultObject.get("label").toString();
+            final String janusId = resultObject.get("id").toString();
             neighbor.setType(type);
             final String idInsight = smartOpenProperties(resultObject, "idInsight");
+            neighbor.setId(janusId);
             String searchKey = findSearchKey(type);
             if (searchKey != null) {
-                neighbor.setId(idInsight);
+                neighbor.setMongoId(idInsight);
                 final String label = smartOpenProperties(resultObject, searchKey);
                 if (label != null) {
                     neighbor.setLabel(label);
@@ -78,22 +79,21 @@ public class TraversalServiceImpl {
         return nodeList;
     }
 
-    public Node getProperties(final String id) {
-        this.log.info("Searching Node with idInsight property: " + id);
-        final String mongoIdQuery = GremlinScriptLiteralVertex.generateHas("idInsight", id);
+    public Node getByMongoId(final String mongoId) {
+        this.log.info("Searching Node with idInsight property: " + mongoId);
+        final String mongoIdQuery = GremlinScriptLiteralVertex.generateHas("idInsight", mongoId);
         final String gremlinQuery = "g.V()." + mongoIdQuery + ".next()";
-        final Node foundNode = internalGetNode(id, gremlinQuery);
+        final Node foundNode = internalGetNode(gremlinQuery);
         if (foundNode == null) return null;
         return foundNode;
     }
 
-    private Node internalGetNode(String id, String gremlinQuery) {
+    private Node internalGetNode(String gremlinQuery) {
         this.log.info("GremlinQuery: " + gremlinQuery);
         final ResultSet resultSet = this.template.getGremlinClient().submit(gremlinQuery);
         this.log.info("Parsing first result");
         final Node foundNode = new Node();
         final Result result = resultSet.one();
-//        final Result result = resultSet.stream().findFirst().get();
         if (result == null) {
             this.log.info("No result");
             return null;
@@ -101,8 +101,10 @@ public class TraversalServiceImpl {
         this.log.info("Found result");
         final LinkedHashMap resultObject = (LinkedHashMap) result.getObject();
         final String type = resultObject.get("label").toString();
-        foundNode.setType(type);
+        final String id = resultObject.get("id").toString();
         foundNode.setId(id);
+        foundNode.setType(type);
+        foundNode.setMongoId(smartOpenProperties(resultObject, "idInsight"));
         final String searchKey = findSearchKey(type);
         this.log.info("Searching key: " + searchKey);
         if (searchKey != null) {
@@ -118,7 +120,7 @@ public class TraversalServiceImpl {
     public Node getByJanusId(final String id) {
         this.log.info("Searching Node with janusId property: " + id);
         final String gremlinQuery = "g.V(" + id + ")";
-        final Node foundNode = internalGetNode(id, gremlinQuery);
+        final Node foundNode = internalGetNode(gremlinQuery);
         if (foundNode == null) return null;
         return foundNode;
     }

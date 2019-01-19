@@ -57,7 +57,7 @@ public class FeedTests extends BasicGraphyTests {
         }
         this.createSpecificBiographics();
         final Node byJanusId = this.traversalService.getByJanusId(randomBiographicsId);
-        final Node properties = this.traversalService.getProperties(this.mongoId);
+        final Node properties = this.traversalService.getByMongoId(this.mongoId);
         Assert.assertNotNull(byJanusId);
         Assert.assertNotNull(properties);
     }
@@ -73,7 +73,7 @@ public class FeedTests extends BasicGraphyTests {
         this.log.info(one.toString());
         final String specificBiographics = this.createSpecificBiographics();
         final Node byJanusId = this.traversalService.getByJanusId(specificBiographics);
-        final Node properties = this.traversalService.getProperties(this.mongoId);
+        final Node properties = this.traversalService.getByMongoId(this.mongoId);
         Assert.assertNotNull(byJanusId);
         Assert.assertNotNull(properties);
     }
@@ -84,7 +84,7 @@ public class FeedTests extends BasicGraphyTests {
         this.log.info(one.toString());
         final String specificBiographics = this.createSpecificBiographics();
         final Node byJanusId = this.traversalService.getByJanusId(specificBiographics);
-        final Node properties = this.traversalService.getProperties(this.mongoId);
+        final Node properties = this.traversalService.getByMongoId(this.mongoId);
         Assert.assertNotNull(byJanusId);
         Assert.assertNotNull(properties);
     }
