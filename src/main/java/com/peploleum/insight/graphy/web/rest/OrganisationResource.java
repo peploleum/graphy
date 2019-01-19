@@ -28,7 +28,7 @@ public class OrganisationResource {
         this.organisationService = organisationService;
     }
 
-    @PostMapping("/organisation")
+    @PostMapping("/organisations")
     public ResponseEntity<Long> createOrganisation(@Valid @RequestBody OrganisationDTO organisationDTO) throws URISyntaxException {
         log.debug("REST request to save Organisation : {}", organisationDTO);
 
@@ -38,14 +38,14 @@ public class OrganisationResource {
                 .body(result);
     }
 
-    @GetMapping("/organisation/{id}")
+    @GetMapping("/organisations/{id}")
     public ResponseEntity<Organisation> getOrganisation(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get Organisation : {}", id);
         Optional<Organisation> organisation = organisationService.findOne(Long.valueOf(id));
         return ResponseUtil.wrapOrNotFound(organisation);
     }
 
-    @DeleteMapping("/organisation/{id}")
+    @DeleteMapping("/organisations/{id}")
     public ResponseEntity<Void> deleteOrganisation(@PathVariable Long id) {
         log.debug("REST request to delete Organisation : {}", id);
         organisationService.delete(id);

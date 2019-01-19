@@ -31,7 +31,7 @@ public class EventResource {
         this.eventService = eventService;
     }
 
-    @PostMapping("/event")
+    @PostMapping("/events")
     public ResponseEntity<Long> createEvent(@Valid @RequestBody EventDTO eventDTO) throws URISyntaxException {
         log.debug("REST request to save Event : {}", eventDTO);
         Long result = eventService.save(eventDTO.getEventName(), eventDTO.getId());
@@ -40,14 +40,14 @@ public class EventResource {
                 .body(result);
     }
 
-    @GetMapping("/event/{id}")
+    @GetMapping("/events/{id}")
     public ResponseEntity<Event> getEvent(@PathVariable String id) throws URISyntaxException {
         log.debug("REST request to get Event : {}", id);
         Optional<Event> event = eventService.findOne(Long.valueOf(id));
         return ResponseUtil.wrapOrNotFound(event);
     }
 
-    @DeleteMapping("/event/{id}")
+    @DeleteMapping("/events/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         log.debug("REST request to delete Event : {}", id);
         eventService.delete(id);
