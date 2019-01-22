@@ -1,8 +1,10 @@
 package com.peploleum.insight.graphy;
 
 import com.peploleum.insight.graphy.domain.Biographics;
+import com.peploleum.insight.graphy.domain.DataJanus;
 import com.peploleum.insight.graphy.dto.Criteria;
 import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
+import com.peploleum.insight.graphy.service.DataJanusServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +22,9 @@ public class BiographicsServiceTest extends BasicGraphyTests {
 
     @Autowired
     private BiographicsServiceImpl biographicsService;
+
+    @Autowired
+    private DataJanusServiceImpl dataJanusService;
 
     @Before
     public void setup()  {
@@ -39,7 +45,12 @@ public class BiographicsServiceTest extends BasicGraphyTests {
 
     @Test
     public void biographicsFindByCriteria(){
-        final Biographics biographicsId = this.biographicsService.findByCriteria(new Criteria("idInsight","f44ae798-c648-4f03-b9fd-dc67324212f0"));
+        final Biographics biographicsId = this.biographicsService.findByCriteria(new Criteria("Biographics","equipmentName","RPG"));
+    }
+
+    @Test
+    public void dataJanusFindByCriteria(){
+        final List<DataJanus> dataJanusList = this.dataJanusService.findByCriteria(new Criteria("","equipmentName","RPG"));
     }
 
 }

@@ -1,12 +1,15 @@
 package com.peploleum.insight.graphy.web.rest;
 
+import com.peploleum.insight.graphy.domain.Biographics;
 import com.peploleum.insight.graphy.domain.RawData;
+import com.peploleum.insight.graphy.dto.Criteria;
 import com.peploleum.insight.graphy.dto.RawDataDTO;
 import com.peploleum.insight.graphy.service.RawDataServiceImpl;
 import com.peploleum.insight.graphy.web.rest.util.HeaderUtil;
 import com.peploleum.insight.graphy.web.rest.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +47,13 @@ public class RawDataResource {
         Optional<RawData> rawData = rawDataService.findOne(Long.valueOf(id));
         return ResponseUtil.wrapOrNotFound(rawData);
     }
+
+    /*@PostMapping("/raw-data/findByCriteria")
+    public ResponseEntity<RawData> getBiographicsByCriteria(@Valid @RequestBody Criteria criteria) throws URISyntaxException {
+        log.debug("REST request to get RawData : {}", criteria.getProperty());
+        RawData rawData = rawDataService.findByCriteria(criteria);
+        return new ResponseEntity<RawData>(rawData, HttpStatus.OK);
+    }*/
 
     @DeleteMapping("/raw-data/{id}")
     public ResponseEntity<Void> deleteOrganisation(@PathVariable Long id) {

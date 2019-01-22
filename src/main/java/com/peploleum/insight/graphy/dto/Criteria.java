@@ -5,16 +5,27 @@ package com.peploleum.insight.graphy.dto;
  */
 public class Criteria {
 
+    private String label;
     private String property;
     private String value;
 
-    public Criteria(String property, String value) {
+
+    public Criteria(String label, String property, String value) {
+        this.label = label;
         this.property = property;
         this.value = value;
     }
 
     public Criteria(){
 
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public String getProperty() {

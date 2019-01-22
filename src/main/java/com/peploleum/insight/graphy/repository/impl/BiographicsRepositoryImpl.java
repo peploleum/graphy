@@ -54,7 +54,8 @@ public class BiographicsRepositoryImpl implements BiographicsRepositoryCustom{
     @Override
     public Biographics findByCriteria(Criteria criteria) {
         final String name = GremlinScriptLiteralVertex.generateHas(criteria.getProperty(), criteria.getValue());
-        final ResultSet resultSet = this.template.getGremlinClient().submit("g.V()." + name);
+        final String label = GremlinScriptLiteralVertex.generateHas("Label", "Biographics");
+        final ResultSet resultSet = this.template.getGremlinClient().submit("g.V()." + label + "."+ name);
         this.log.info("searching by criteria:" + name);
         final Biographics biographics = new Biographics();
         LinkedHashMap resultObjTest = (LinkedHashMap) resultSet.one().getObject();
