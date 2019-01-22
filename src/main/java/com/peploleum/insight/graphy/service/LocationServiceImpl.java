@@ -27,7 +27,7 @@ public class LocationServiceImpl {
 
         location = locationRepository.save(location);
         Long result = location.getId();
-        this.log.info("Vertex equipment saved: " + location.getId());
+        this.log.info("Vertex location saved: " + location.getId());
 
         return result;
     }
