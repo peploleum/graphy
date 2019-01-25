@@ -12,4 +12,6 @@ public interface DataJanusRepositoryCustom {
     public List<DataJanus> findByCriteria(Criteria criteria);
 
     public DataJanus findOne(Long id);
+
+    List<DataJanus> findAllInOutVerticesByCriteria(Long id, Criteria criteria);
 }

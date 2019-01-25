@@ -37,7 +37,14 @@ public class DataJanusResource {
     }
 
     @PostMapping("/findByCriteria")
-    public ResponseEntity<List<DataJanus>> getBiographicsByCriteria(@Valid @RequestBody Criteria criteria) throws URISyntaxException {
+    public ResponseEntity<List<DataJanus>> getDataJanusListByCriteria(@Valid @RequestBody Criteria criteria) throws URISyntaxException {
+        log.debug("REST request to get RawData : {}", criteria.getProperty());
+        List<DataJanus> dataJanusList = dataJanusService.findByCriteria(criteria);
+        return new ResponseEntity<List<DataJanus>>(dataJanusList, HttpStatus.OK);
+    }
+
+    @PostMapping("/findAllInOutVerticesByCriteria")
+    public ResponseEntity<List<DataJanus>> getAllInOutVerticesByCriteria(@Valid @RequestBody Criteria criteria) throws URISyntaxException {
         log.debug("REST request to get RawData : {}", criteria.getProperty());
         List<DataJanus> dataJanusList = dataJanusService.findByCriteria(criteria);
         return new ResponseEntity<List<DataJanus>>(dataJanusList, HttpStatus.OK);

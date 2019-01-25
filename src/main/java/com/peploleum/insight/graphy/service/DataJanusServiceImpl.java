@@ -56,8 +56,15 @@ public class DataJanusServiceImpl {
     }
 
     public List<DataJanus> findByCriteria(Criteria criteria){
-        log.debug("Request to get Biographics by Criteria", criteria.getProperty());
+        log.debug("Request to get a list of DataJanus by Criteria", criteria.getProperty());
         List<DataJanus> dataJanusList = dataJanusRepository.findByCriteria(criteria);
+        log.info(dataJanusList.toString());
+        return dataJanusList;
+    }
+
+    public List<DataJanus> findAllInOutVerticesByCriteria(Long id, Criteria criteria){
+        log.debug("Request to get of all the DataJanus In/Out Vertices by Criteria", criteria.getProperty());
+        List<DataJanus> dataJanusList = dataJanusRepository.findAllInOutVerticesByCriteria(id , criteria);
         log.info(dataJanusList.toString());
         return dataJanusList;
     }
