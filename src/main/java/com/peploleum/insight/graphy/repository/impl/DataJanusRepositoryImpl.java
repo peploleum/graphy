@@ -54,8 +54,11 @@ public class DataJanusRepositoryImpl implements DataJanusRepositoryCustom{
     @Override
     public List<DataJanus> findByCriteria(Criteria criteria) {
         final String name = GremlinScriptLiteralVertex.generateHas(criteria.getProperty(), criteria.getValue());
-        //final String label = GremlinScriptLiteralVertex.generateHas("Label", criteria.getLabel());
-        final ResultSet resultSet = this.template.getGremlinClient().submit("g.V()."+ name);
+        String label = "";
+        if(!criteria.getLabel().isEmpty())
+            label = "has(label,'"+criteria.getLabel()+"' ).";
+        this.log.info("Label : " + label);
+        final ResultSet resultSet = this.template.getGremlinClient().submit("g.V()."+label+ name);
         this.log.info("searching by criteria:" + name);
         final List<DataJanus> dataJanusList = new ArrayList<>();
         final Map<String, String> emptyMap = new HashMap<String, String>();

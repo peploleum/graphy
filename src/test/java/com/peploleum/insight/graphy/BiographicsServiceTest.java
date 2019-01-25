@@ -43,10 +43,6 @@ public class BiographicsServiceTest extends BasicGraphyTests {
         final Optional<Biographics> biographicsId = this.biographicsService.findOne(Long.valueOf(getIdRelation()));
     }
 
-    @Test
-    public void biographicsFindByCriteria(){
-        final Biographics biographicsId = this.biographicsService.findByCriteria(new Criteria("Biographics","equipmentName","RPG"));
-    }
 
     @Test
     public void dataJanusFindByCriteria(){
