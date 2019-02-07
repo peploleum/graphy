@@ -2,7 +2,6 @@ package com.peploleum.insight.graphy.repository.impl;
 
 import com.microsoft.spring.data.gremlin.common.GremlinFactory;
 import com.microsoft.spring.data.gremlin.conversion.MappingGremlinConverter;
-import com.microsoft.spring.data.gremlin.conversion.script.GremlinScriptLiteralVertex;
 import com.microsoft.spring.data.gremlin.mapping.GremlinMappingContext;
 import com.microsoft.spring.data.gremlin.query.GremlinOperations;
 import com.microsoft.spring.data.gremlin.query.GremlinTemplate;

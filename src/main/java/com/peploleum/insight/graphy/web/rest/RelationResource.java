@@ -1,10 +1,8 @@
 package com.peploleum.insight.graphy.web.rest;
 
-import com.peploleum.insight.graphy.domain.Relation;
 import com.peploleum.insight.graphy.dto.RelationDTO;
 import com.peploleum.insight.graphy.service.RelationServiceImpl;
 import com.peploleum.insight.graphy.web.rest.util.HeaderUtil;
-import com.peploleum.insight.graphy.web.rest.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedHashMap;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")

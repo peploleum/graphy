@@ -1,22 +1,19 @@
 package com.peploleum.insight.graphy.domain;
 
-import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Vertex;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tinkerpop.shaded.kryo.NotNull;
-import org.springframework.data.annotation.Id;
+
+import java.util.Objects;
+
 /*import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.Mapping;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;*/
-
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Objects;
 
 //import com.peploleum.insight.domain.enumeration.EventType;
 

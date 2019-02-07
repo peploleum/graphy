@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.apache.tinkerpop.gremlin.driver.ser.Serializers;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

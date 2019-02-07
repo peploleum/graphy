@@ -2,15 +2,14 @@ package com.peploleum.insight.graphy.service;
 
 
 import com.peploleum.insight.graphy.domain.Biographics;
+import com.peploleum.insight.graphy.dto.Criteria;
 import com.peploleum.insight.graphy.repository.BiographicsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
-import com.peploleum.insight.graphy.dto.Criteria;
 
 @Service
 public class BiographicsServiceImpl {

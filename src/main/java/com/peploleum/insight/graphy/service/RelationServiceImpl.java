@@ -1,16 +1,14 @@
 package com.peploleum.insight.graphy.service;
 
-import com.peploleum.insight.graphy.dto.RelationDTO;
-import com.peploleum.insight.graphy.web.rest.Type;
 import com.peploleum.insight.graphy.domain.*;
 import com.peploleum.insight.graphy.repository.*;
+import com.peploleum.insight.graphy.web.rest.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
-import java.util.Optional;
 
 @Service
 public class RelationServiceImpl {
