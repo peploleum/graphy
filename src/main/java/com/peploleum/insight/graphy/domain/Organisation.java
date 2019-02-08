@@ -1,24 +1,13 @@
 package com.peploleum.insight.graphy.domain;
 
-import com.microsoft.spring.data.gremlin.annotation.GeneratedValue;
 import com.microsoft.spring.data.gremlin.annotation.Vertex;
-import javafx.scene.chart.PieChart;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.tinkerpop.shaded.kryo.NotNull;
-import org.springframework.data.annotation.Id;
-/*import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.data.elasticsearch.annotations.Mapping;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import javax.validation.constraints.*;*/
 
-import java.io.Serializable;
 import java.util.Objects;
 
-//import com.peploleum.insight.domain.enumeration.Size;
 
 /**
  * A Organisation.
@@ -27,19 +16,13 @@ import java.util.Objects;
 @Vertex
 @AllArgsConstructor
 @NoArgsConstructor
-//@Document(collection = "organisation")
-//@org.springframework.data.elasticsearch.annotations.Document(indexName = "organisation")
 public class Organisation extends DataJanus {
 
 
     @NotNull
-    //@Field("organisation_name")
     private String organisationName;
 
-    //@Field("organisation_descrption")
     private String organisationDescrption;
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 
     public String getOrganisationName() {
         return organisationName;
@@ -90,9 +73,9 @@ public class Organisation extends DataJanus {
     @Override
     public String toString() {
         return "Organisation{" +
-            "id=" + getId() +
-            ", organisationName='" + getOrganisationName() + "'" +
-            ", organisationDescrption='" + getOrganisationDescrption() + "'" +
-            "}";
+                "id=" + getId() +
+                ", organisationName='" + getOrganisationName() + "'" +
+                ", organisationDescrption='" + getOrganisationDescrption() + "'" +
+                "}";
     }
 }

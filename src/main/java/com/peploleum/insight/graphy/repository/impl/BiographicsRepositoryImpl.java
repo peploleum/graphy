@@ -10,8 +10,6 @@ import com.peploleum.insight.graphy.domain.Biographics;
 import com.peploleum.insight.graphy.dto.Criteria;
 import com.peploleum.insight.graphy.repository.BiographicsRepositoryCustom;
 import com.peploleum.insight.graphy.repository.RelationRepository;
-import com.peploleum.insight.graphy.service.BiographicsServiceImpl;
-import org.apache.tinkerpop.gremlin.driver.Result;
 import org.apache.tinkerpop.gremlin.driver.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +20,6 @@ import org.springframework.data.annotation.Persistent;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by nicmir on 18/01/2019.
@@ -41,8 +37,6 @@ public class BiographicsRepositoryImpl implements BiographicsRepositoryCustom{
     private GremlinFactory gremlinFactory;
 
     private GremlinTemplate template;
-
-    protected String mongoId = UUID.randomUUID().toString();
 
     public BiographicsRepositoryImpl(GremlinOperations operations, ApplicationContext context, GremlinFactory gremlinFactory) throws ClassNotFoundException
     {
@@ -102,10 +96,7 @@ public class BiographicsRepositoryImpl implements BiographicsRepositoryCustom{
 
     }
 
-    @Override
-    public void createMassBiographics(String num) {
 
-    }
 
 
 
