@@ -116,6 +116,11 @@ public class RelationServiceImpl {
         return relationRepository.findOne(id);
     }
 
+    public void linkAll(){
+        log.debug("All the Vertices will be linked between each other");
+        relationRepository.linkAll();
+    }
+
     /**
      * Delete the biographics by id.
      *

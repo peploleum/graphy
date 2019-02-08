@@ -10,4 +10,7 @@ public interface RelationRepositoryCustom {
     public void myDeleteById(String id);
 
     public LinkedHashMap findOne(String id);
+
+    public void linkAll();
+
 }

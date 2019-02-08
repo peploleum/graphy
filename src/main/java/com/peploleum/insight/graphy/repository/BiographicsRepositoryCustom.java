@@ -11,4 +11,5 @@ import java.util.LinkedHashMap;
 public interface BiographicsRepositoryCustom {
 
     public Biographics findByCriteria(Criteria criteria);
+    public void createMassBiographics(String num);
 }

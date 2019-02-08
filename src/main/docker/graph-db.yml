@@ -8,7 +8,7 @@ services:
     # - "HEAP_NEWSIZE:4096M"
     # - "MAX_HEAP_SIZE:4096M"
     environment:
-          JAVA_OPTS: -Xms256m -Xmx4048m
+          JAVA_OPTS: -Xms256m -Xmx2048m
     expose:
     - 7000
     - 7001

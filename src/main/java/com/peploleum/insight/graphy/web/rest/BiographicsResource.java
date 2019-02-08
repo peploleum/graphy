@@ -68,6 +68,13 @@ public class BiographicsResource {
         return new ResponseEntity<Biographics>(biographics, HttpStatus.OK);
     }
 
+    @GetMapping("/createmassbiographics/{num}")
+    public ResponseEntity<String> createMassBiographics(@PathVariable String num) throws URISyntaxException {
+        log.debug("Create mass Biographics : {}", num);
+        biographicsService.createMassBiographics(num);
+        return new ResponseEntity<String>(num, HttpStatus.OK);
+    }
+
     /**
      * DELETE  /biographics/:id : delete the "id" biographics.
      *

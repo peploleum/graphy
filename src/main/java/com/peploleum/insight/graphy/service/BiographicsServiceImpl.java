@@ -3,12 +3,15 @@ package com.peploleum.insight.graphy.service;
 
 import com.peploleum.insight.graphy.domain.Biographics;
 import com.peploleum.insight.graphy.repository.BiographicsRepository;
+import com.peploleum.insight.graphy.repository.RelationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import com.peploleum.insight.graphy.dto.Criteria;
 
@@ -21,7 +24,7 @@ public class BiographicsServiceImpl {
     private final BiographicsRepository biographicsRepository;
 
 
-    public BiographicsServiceImpl(BiographicsRepository biographicsRepository/*, BiographicsMapper biographicsMapper, BiographicsSearchRepository biographicsSearchRepository*/) {
+    public BiographicsServiceImpl(BiographicsRepository biographicsRepository) {
         this.biographicsRepository = biographicsRepository;
     }
 
@@ -57,6 +60,23 @@ public class BiographicsServiceImpl {
         log.info(biographics.toString());
         return biographics;
     }
+
+    public void createMassBiographics(String num){
+        log.debug("Request to save Biographics : {}");
+        for (int i = 0; i < Integer.valueOf(num); i++) {
+            Biographics biographics = new Biographics();
+            biographics.setBiographicsName(UUID.randomUUID().toString());
+            final int randomThreshold = ThreadLocalRandom.current().nextInt(0, AGE_THRESHOLD);
+            biographics.setBiographicsAge(randomThreshold);
+            biographics.setIdInsight(UUID.randomUUID().toString());
+
+            biographics = biographicsRepository.save(biographics);
+            Long result = biographics.getId();
+            this.log.info("Vertex Biographics saved: " + biographics.getId());
+        }
+    }
+
+
 
     /**
      * Delete the biographics by id.

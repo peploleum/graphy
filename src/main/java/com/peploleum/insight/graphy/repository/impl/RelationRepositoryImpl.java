@@ -52,11 +52,17 @@ public class RelationRepositoryImpl implements RelationRepositoryCustom {
     public void myDeleteById(String id) {
         final ResultSet resultSet = this.template.getGremlinClient().submit("g.E('"+id+"').drop()");
     }
+
     @Override
     public LinkedHashMap findOne(String id) {
         final ResultSet resultSet = this.template.getGremlinClient().submit("g.E('"+id+"')");
         this.log.info("searching by id:" + id);
         LinkedHashMap resultObjTest = (LinkedHashMap) resultSet.one().getObject();
         return resultObjTest;
+    }
+
+    @Override
+    public void linkAll(){
+        this.template.getGremlinClient().submit("def allNode = graph.vertices(); def toDoList = []; graph.vertices().each { toDoList.add(it) }; allNode.each { def currentNode = it; toDoList.remove(currentNode); toDoList.each{ it.addEdge('voit', currentNode)}; toDoList.add(currentNode)}");
     }
 }
