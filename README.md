@@ -1,4 +1,4 @@
-# graphy
+# GRAPHY
 
 Up the services
 
