@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+		<spring-cloud.version>Greenwich.M3</spring-cloud.version>
         <jib-maven-plugin.version>0.9.11</jib-maven-plugin.version>
     </properties>
 
@@ -46,7 +47,7 @@
             <version>5.0.4.RELEASE</version>
         </dependency>
     </dependencies>
-
+	
     <build>
         <plugins>
             <plugin>
@@ -102,6 +103,32 @@
                                 </resources>
                             </configuration>
                         </execution>
+						<execution>
+	                        <id>docker-resources</id>
+	                        <phase>validate</phase>
+	                        <goals>
+	                            <goal>copy-resources</goal>
+	                        </goals>
+	                        <configuration>
+	                            <outputDirectory>target/</outputDirectory>
+	                            <resources>
+	                                <resource>
+	                                    <directory>src/main/docker/</directory>
+	                                    <filtering>false</filtering>
+	                                    <excludes>
+	                                        <exclude>**/*.yml</exclude>
+	                                    </excludes>
+	                                </resource>
+									<resource>
+	                                    <directory>src/main/jib/</directory>
+	                                    <filtering>false</filtering>
+	                                    <excludes>
+	                                        <exclude>**/*.yml</exclude>
+	                                    </excludes>
+	                                </resource>
+	                            </resources>
+	                        </configuration>
+	                    </execution>
                     </executions>
                 </plugin>
                 <plugin>

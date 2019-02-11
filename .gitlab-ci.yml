@@ -4,10 +4,10 @@ services:
 
 variables:
   DOCKER_DRIVER: overlay
-  SPRING_PROFILES_ACTIVE: gitlab-ci
+  CI_BUILD_USER: magnarox
   USER_GITLAB: capgemini
   APP_NAME: graphy
-  REPO: graphy
+  REPO: magnarox/graphy
 
 stages:
   - build
@@ -20,12 +20,14 @@ maven-build:
   artifacts:
     paths:
       - target/*.jar
+      - target/*.sh
+      - target/Dockerfile
 
 docker-build:
   stage: deploy 
   script:
-    - docker login -u magnarox -p $CI_BUILD_TOKEN registry.hub.docker.com
-    - docker build -t registry.hub.docker.com/magnarox/$REPO . 
-    - docker push registry.hub.docker.com/magnarox/$REPO 
-
+    - docker login -u $CI_BUILD_USER -p $CI_BUILD_TOKEN registry.hub.docker.com
+    - cd target
+    - docker build -t registry.hub.docker.com/$REPO .
+    - docker push registry.hub.docker.com/$REPO 
 
