@@ -42,9 +42,10 @@ deploy_dev:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    - kubectl config set-cluster nosebit --server="$KUBE_URL" --insecure-skip-tls-verify=true
-    - kubectl config set-credentials admin --username="$KUBE_USER" --password="$KUBE_PASSWORD"
-    - kubectl config set-context default --cluster=nosebit --user=admin
-    - kubectl config use-context default
+    - kubectl config set-cluster $KUBE_CLUSTER --server=$KUBE_URL --insecure-skip-tls-verify
+    - kubectl config set-context $KUBE_CONTEXT --cluster=$KUBE_CLUSTER
+    - kubectl config set-credentials $KUBE_USER --token=$KUBE_TOKEN
+    - kubectl config set-context $KUBE_CONTEXT --user=$KUBE_USER
+    - kubectl config use-context $KUBE_CONTEXT
     - kubectl apply -f src/main/kubernetes/graphy-deployment.yml
 
