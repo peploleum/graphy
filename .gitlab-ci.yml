@@ -33,7 +33,7 @@ docker-build:
     - cd target
     - docker build -t $CONTAINER_IMAGE .
     - docker push $CONTAINER_IMAGE 
-	
+
 deploy_dev:
   stage: deploy
   image: alpine
