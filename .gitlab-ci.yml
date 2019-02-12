@@ -47,5 +47,4 @@ deploy_dev:
     - kubectl config set-credentials $KUBE_USER --token=$KUBE_TOKEN
     - kubectl config set-context $KUBE_CONTEXT --user=$KUBE_USER
     - kubectl config use-context $KUBE_CONTEXT
-    - kubectl apply -f src/main/kubernetes/graphy-deployment.yml
-
+    - kubectl set image deployment/insight-graphy graphy-app=$CI_DOCKER_IMAGE:$CI_DOCKER_BUILD_NUMBER --namespace=insight
