@@ -119,13 +119,6 @@
 	                                        <exclude>**/*.yml</exclude>
 	                                    </excludes>
 	                                </resource>
-									<resource>
-	                                    <directory>src/main/jib/</directory>
-	                                    <filtering>false</filtering>
-	                                    <excludes>
-	                                        <exclude>**/*.yml</exclude>
-	                                    </excludes>
-	                                </resource>
 	                            </resources>
 	                        </configuration>
 	                    </execution>
