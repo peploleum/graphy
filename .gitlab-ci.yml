@@ -3,18 +3,17 @@ services:
   - docker:dind
 
 variables:
-  DOCKER_DRIVER: overlay
+  DOCKER_DRIVER: overlay2
+  APP_NAME: graphy
   CI_DOCKER_REGISTRY: registry.hub.docker.com
   CI_DOCKER_IMAGE: magnarox/graphy
-  CI_DOCKER_BUILD_NUMBER: 1.0.0
-  APP_NAME: graphy
-  CONTAINER_IMAGE: $CI_DOCKER_REGISTRY/$CI_DOCKER_IMAGE:$CI_DOCKER_BUILD_NUMBER
+  CONTAINER_IMAGE: $CI_DOCKER_REGISTRY/$CI_DOCKER_IMAGE
   KUBECTL_VERSION: v1.13.3
 
 stages:
   - build-jar
   - build-docker
-  - deploy 
+  - deploy-k8s
 
 maven-build:
   image: maven:3-jdk-8
@@ -30,12 +29,14 @@ docker-build:
   stage: build-docker 
   script:
     - docker login -u $CI_BUILD_USER -p $CI_BUILD_TOKEN $CI_DOCKER_REGISTRY
+    - docker pull $CONTAINER_IMAGE:latest || true
     - cd target
-    - docker build -t $CONTAINER_IMAGE .
-    - docker push $CONTAINER_IMAGE 
+    - docker build --cache-from $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$CI_COMMIT_SHORT_SHA --tag $CONTAINER_IMAGE:latest .
+    - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker push $CONTAINER_IMAGE:latest
 
 deploy_dev:
-  stage: deploy
+  stage: deploy-k8s
   image: alpine
   script:
     - apk add --no-cache curl
@@ -47,4 +48,4 @@ deploy_dev:
     - kubectl config set-credentials $KUBE_USER --token=$KUBE_TOKEN
     - kubectl config set-context $KUBE_CONTEXT --user=$KUBE_USER
     - kubectl config use-context $KUBE_CONTEXT
-    - kubectl set image deployment/insight-graphy graphy-app=$CI_DOCKER_IMAGE:$CI_DOCKER_BUILD_NUMBER --namespace=insight
+    - kubectl set image deployment/insight-graphy graphy-app=$CI_DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA --namespace=insight
