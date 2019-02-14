@@ -14,3 +14,8 @@ Build
     docker login --username=peploleum
     docker tag graphy peploleum/graphy:latest
     docker push peploleum/graphy:latest
+
+Developement stuff
+
+* Install docker & docker-compose
+* Install maven 3.5.4
