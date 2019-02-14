@@ -15,7 +15,7 @@ Build
     docker tag graphy peploleum/graphy:latest
     docker push peploleum/graphy:latest
 
-Developement stuff
+Development stuff
 
-* Install docker & docker-compose
+* Install docker and docker-compose
 * Install maven 3.5.4
