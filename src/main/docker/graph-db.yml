@@ -17,8 +17,13 @@ services:
     - 9160
     volumes:
     #- ./cassandra/data:/var/lib/cassandra
-    - ./janus/conf/cassandra.yaml:/etc/cassandra/cassandra.yaml
+    - ./cassandra/cassandra.yaml:/etc/cassandra/cassandra.yaml
     command: bash -c 'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 0; fi && /docker-entrypoint.sh cassandra -f'
+    # Cassandra ulimt recommended settings
+    ulimits:
+      memlock: -1
+      nproc: 32768
+      nofile: 100000
     networks:
     - insight
 networks:
