@@ -6,8 +6,8 @@ variables:
   DOCKER_DRIVER: overlay2
   APP_NAME: graphy
   CI_DOCKER_REGISTRY: registry.hub.docker.com
-  CI_DOCKER_IMAGE: magnarox/graphy
-  CONTAINER_IMAGE: $CI_DOCKER_REGISTRY/$CI_DOCKER_IMAGE
+  CI_DOCKER_IMAGE: graphy
+  CONTAINER_IMAGE: $CI_DOCKER_REGISTRY/$CI_BUILD_USER/$CI_DOCKER_IMAGE
   KUBECTL_VERSION: v1.13.3
 
 stages:
@@ -48,4 +48,4 @@ deploy_dev:
     - kubectl config set-credentials $KUBE_USER --token=$KUBE_TOKEN
     - kubectl config set-context $KUBE_CONTEXT --user=$KUBE_USER
     - kubectl config use-context $KUBE_CONTEXT
-    - kubectl set image deployment/insight-graphy graphy-app=$CI_DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA --namespace=insight
+    - kubectl set image deployment/insight-graphy graphy-app=$CI_BUILD_USER/$CI_DOCKER_IMAGE:$CI_COMMIT_SHORT_SHA --namespace=insight
